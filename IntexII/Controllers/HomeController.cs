@@ -6,16 +6,18 @@ namespace IntexII.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
+        private IIntexRepository _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IIntexRepository temp)
         {
-            _logger = logger;
+            _repo = temp;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var Products = _repo.getAllProducts();
+            return View(Products);
         }
 
         public IActionResult Privacy()

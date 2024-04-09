@@ -11,7 +11,7 @@ namespace IntexII.Models
         [Required]
         [ForeignKey("TransactionId")]
         public int TransactionId { get; set; }
-        public Transaction Transaction { get; set; }
+        public Order Order { get; set; }
         [Required]
         [ForeignKey("ProductId")]
         public int ProductId { get; set; }

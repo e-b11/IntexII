@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home";
 }
 
+@model List<Product>;
+
 <div class="hero">
     <picture>
         <source media="(min-width: 801px)" srcset="~/img/lego-hero-2000px.jpg" />
@@ -19,3 +21,9 @@
 </div>
 
 <p>bla bla bla</p>
+    using Microsoft.CodeAnalysis.CSharp;
+
+@foreach (var p in Model) 
+{
+    <h1>@p.ProductName</h1>
+}
