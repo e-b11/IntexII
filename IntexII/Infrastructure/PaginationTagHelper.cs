@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using IntexII.Models.ViewModels;
 
 namespace IntexII.Infrastructure
 {
