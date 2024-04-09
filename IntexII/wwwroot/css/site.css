@@ -1,3 +1,15 @@
+/*CSS Variables*/
+:root {
+    --indigo: #364573;
+    --misty-violet: #6d226b;
+    --soft-magenta: #b56576;
+    --bright-rose: #e56b6f;
+    --sandy: #faeae1;
+    --color-svg: white;
+    --color-svg-hover: #364573;
+    --color-svg-close: white;
+}
+
 html {
   font-size: 14px;
 }
@@ -19,4 +31,21 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }

@@ -17,6 +17,18 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IIntexRepository, EFIntexRepository>();
+
+builder.Services.AddRazorPages();
+
+//Uncomment these as things are built
+//builder.Services.AddDistributedMemoryCache();
+//builder.Services.AddSession();
+
+//builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
