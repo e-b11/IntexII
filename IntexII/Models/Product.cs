@@ -9,7 +9,7 @@ namespace IntexII.Models
         [Required]
         public string ProductName { get; set; }
         [Required]
-        public string Year { get; set; }
+        public int Year { get; set; }
         [Required]
         public int NumParts { get; set; }
         [Required]

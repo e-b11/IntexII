@@ -16,8 +16,8 @@ namespace IntexII.Controllers
 
         public IActionResult Index()
         {
-            var Products = _repo.getAllProducts();
-            return View(Products);
+            var products = _repo.Products;
+            return View(products);
         }
 
         public IActionResult Privacy()
