@@ -32,6 +32,6 @@ namespace IntexII.Models
         [Required]
         public string TypeOfCard { get; set; }
         [Required]
-        public bool Fraud { get; set; }
+        public int Fraud { get; set; }
     }
 }
