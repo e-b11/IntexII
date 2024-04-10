@@ -82,5 +82,18 @@ namespace IntexII.Controllers
 
             return View(singleProduct);
         }
+
+        public ViewResult Checkout()
+        {
+            var checkoutDetails = new CheckoutViewModel
+            {
+                Order = new Order(),
+
+                Lines = new List<Cart.CartLine>(),
+            };
+
+
+            return View(checkoutDetails);
+        }
     }
 }
