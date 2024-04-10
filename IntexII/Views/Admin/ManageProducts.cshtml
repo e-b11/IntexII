@@ -28,17 +28,42 @@
                     <td>@p.Year</td>
                     <td>@p.NumParts</td>
                     <td>@p.Price</td>
-                    <td>@p.ImgLink</td>
+                    <td>
+                        @if (p.ImgLink.Length > 30) // Check if img link is longer than 30 characters
+                        {
+                            <span title="@p.ImgLink">@p.ImgLink.Substring(0, 30)...</span> // Show truncated img link with ellipsis
+                        }
+                        else
+                        {
+                            @p.ImgLink // Show full img link if shorter than 30 characters
+                        }
+                    </td>
                     <td>@p.PrimaryColor</td>
                     <td>@p.SecondaryColor</td>
-                    <td>@p.ProductDescription</td>
+                    <td>
+                        @if (p.ProductDescription.Length > 50) // Check if description is longer than 50 characters
+                        {
+                            <span title="@p.ProductDescription">@p.ProductDescription.Substring(0, 50)...</span> // Show truncated description with ellipsis
+                        }
+                        else
+                        {
+                            @p.ProductDescription // Show full description if shorter than 50 characters
+                        }
+                    </td>
                     <td>@p.Category</td>
                     <td>
-                        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@p.ProductId" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Admin" asp-action="ConfirmDeleteProduct" asp-route-id="@p.ProductId" class="btn btn-danger ml-2">Delete</a>
+                      <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@p.ProductId" class="btn btn-primary">Edit</a>
                     </td>
+                    <td>
+                      <a asp-controller="Admin" asp-action="ConfirmDeleteProduct" asp-route-id="@p.ProductId" class="btn btn-danger ml-2">Delete</a>
+                    </td> 
+                        
                 </tr>
             }
         </tbody>
     </table>
+  <div class="text-center">
+    <a asp-controller="Admin" asp-action="AddProduct" class="btn btn-success">New Product</a>
+  </div>
+    
 </div>

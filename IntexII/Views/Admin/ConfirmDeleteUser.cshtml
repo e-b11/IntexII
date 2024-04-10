@@ -3,7 +3,7 @@
 <h2>Do you want to delete @Model.Email?</h2>
 
 <form asp-controller="Admin" asp-action="DeleteUser" method="post">
-    <input type="hidden" name="Id" value="@Model.Id">
+    <input type="hidden" asp-for="Id" value="@Model.Id">
     <a asp-controller="Admin" asp-action="ManageUsers" class="btn btn-secondary">Cancel</a>
     <button type="submit" class="btn btn-danger">Delete User</button>
 </form>

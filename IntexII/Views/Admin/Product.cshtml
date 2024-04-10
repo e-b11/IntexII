@@ -1,6 +1,7 @@
 @model Product
 
 <form action="" method="post" class="mt-4">
+  <input type="hidden" asp-for="ProductId">
     <div class="form-group">
         <label asp-for="ProductName" class="font-weight-bold">Product Name:</label>
         <input asp-for="ProductName" class="form-control" />
@@ -43,7 +44,16 @@
     </div>
     <div class="form-group">
         <label asp-for="Category" class="font-weight-bold">Category:</label>
-        <input asp-for="Category" class="form-control" />
+        <select asp-for="Category" class="form-control">
+          <option value="Star Wars">Star Wars</option>
+          <option value="DC">DC</option>
+          <option value="Vehicle">Vehicle</option>
+          <option value="Part">Part</option>
+          <option value="Harry Potter">Harry Potter</option>
+          <option value="Colorful">Colorful</option>
+          <option value="Structure">Structure</option>
+          <option value="Other">Other</option>
+        </select>
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
 

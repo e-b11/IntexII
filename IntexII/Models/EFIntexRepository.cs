@@ -39,7 +39,17 @@
         {
             return _context.Orders.Where(o => o.CustomerId == customerId);
         }
+        public void AddOrder(Order order)
+        {
+            _context.Add(order);
+            _context.SaveChanges();
+        }
         public IQueryable<LineItem> LineItems => _context.LineItems;
+        public void AddLineItem(LineItem lineItem)
+        {
+            _context.Add(lineItem);
+            _context.SaveChanges();
+        }
 
     }
 }

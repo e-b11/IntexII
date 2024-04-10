@@ -14,6 +14,9 @@
         public IQueryable<Order> Orders { get; }
         public IQueryable<Order> GetCustomerOrders(int customerId);
 
+        public void AddOrder(Order order);
+
         public IQueryable<LineItem> LineItems { get; }
+        public void AddLineItem(LineItem lineItem);
     }
 }

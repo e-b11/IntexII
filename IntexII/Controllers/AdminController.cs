@@ -16,6 +16,10 @@ public class AdminController : Controller
         _repo = temp;
     }
 
+    public IActionResult Index()
+    {
+      return View();
+    }
     public IActionResult ManageUsers()
     {
         // Retrieve all users from the database
@@ -25,9 +29,9 @@ public class AdminController : Controller
         return View(users);
     }
     [HttpGet]
-    public IActionResult EditUser(string userId)
+    public IActionResult EditUser(string id)
     {
-      var user = _userManager.Users.Single(u => u.Id == userId);
+      var user = _userManager.Users.Single(u => u.Id == id);
       return View(user);
     }
 
@@ -38,36 +42,72 @@ public class AdminController : Controller
       return RedirectToAction("Admin", "ManageUsers");
 
     }
-    public IActionResult ConfirmDeleteUser(string userId)
+    public IActionResult ConfirmDeleteUser(string id)
     {
-      var user = _userManager.Users.Single(u => u.Id == userId);
+      var user = _userManager.Users.Single(u => u.Id == id);
       return View(user);
     }
-    public IActionResult DeleteUser(ApplicationUser user)
+    [HttpPost]
+    public async Task<IActionResult> DeleteUser(string Id)
     {
-      // _userManager.Users.Remove(user);
-      return RedirectToAction("Admin", "ManageUsers");
+      var user = await _userManager.FindByIdAsync(Id);
+      if (user == null)
+      {
+          return NotFound(); // User not found
+      }
+
+      var result = await _userManager.DeleteAsync(user);
+      if (result.Succeeded)
+      {
+          // User deleted successfully
+          return RedirectToAction("ManageUsers"); // Redirect to the list of users
+      }
+      else
+      {
+          // Failed to delete user, handle error (e.g., display error message)
+          Console.WriteLine("Something went wrong trying to delete the user " + user.Email);
+          return RedirectToAction("Home", "Error");
+      }
     }
+
+
 
     public IActionResult ManageProducts()
     {
       var products = _repo.Products.ToList();
       return View(products);
     }
+    [HttpGet]
     public IActionResult AddProduct()
     {
-      return View("Product");
+      return View("Product", new Product());
+    }
+    [HttpPost]
+    public IActionResult AddProduct(Product product)
+    {
+      _repo.AddProduct(product);
+      return RedirectToAction("ManageProducts");
     }
     [HttpGet]
-    public IActionResult EditProduct(int productId)
+    public IActionResult EditProduct(int id)
     {
-      var product = _repo.Products.Single(p => p.ProductId == productId);
+      var product = _repo.Products.Single(p => p.ProductId == id);
       return View("Product", product);
     }
     [HttpPost]
     public IActionResult EditProduct(Product product)
     {
       _repo.EditProduct(product);
+      return RedirectToAction("ManageProducts");
+    }
+    public IActionResult ConfirmDeleteProduct(int id)
+    {
+      var product = _repo.Products.Single(p => p.ProductId == id);
+      return View(product);
+    }
+    public IActionResult DeleteProduct(Product product)
+    {
+      _repo.DeleteProduct(product);
       return RedirectToAction("ManageProducts");
     }
 }
