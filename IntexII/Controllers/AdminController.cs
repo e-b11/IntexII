@@ -3,6 +3,8 @@ using IntexII.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using IntexII.ViewModels;
+using IntexII.Models.ViewModels;
 
 namespace IntexII.Controllers;
 public class AdminController : Controller
@@ -16,9 +18,9 @@ public class AdminController : Controller
         _repo = temp;
     }
 
-    public IActionResult Index()
+    public IActionResult Home()
     {
-      return View();
+      return View("AdminHome");
     }
     public IActionResult ManageUsers()
     {
@@ -109,5 +111,36 @@ public class AdminController : Controller
     {
       _repo.DeleteProduct(product);
       return RedirectToAction("ManageProducts");
+    }
+
+    public IActionResult ManageOrders(int pageNum = 1)
+    {
+      int defaultPageSize = 50;
+
+      int pageSize = HttpContext.Session.GetInt32("pageSize") ?? defaultPageSize;
+
+      var OrderManager = new OrdersListViewModel
+      {
+        Orders = _repo.Orders
+                              .OrderBy(x => x.TransactionId)
+                              .Skip((pageNum - 1) * pageSize)
+                              .Take(pageSize),
+        PaginationInfo = new PaginationInfo
+        {
+          CurrentPage = pageNum,
+          ItemsPerPage = pageSize,
+          TotalItems = _repo.Orders.Count()
+        }
+      };              
+      return View(OrderManager);
+    }
+    [HttpPost]
+    public IActionResult ChangePageSize(int pageSize)
+    {
+        // Validate and set the pageSize into session
+        HttpContext.Session.SetInt32("pageSize", pageSize);
+
+        // Redirect back to the Index action or wherever appropriate
+        return RedirectToAction("ManageOrders");
     }
 }

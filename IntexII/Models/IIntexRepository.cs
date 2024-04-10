@@ -13,7 +13,7 @@
 
         public IQueryable<Order> Orders { get; }
         public IQueryable<Order> GetCustomerOrders(int customerId);
-
+        public IQueryable<Order> GetFraudOrders();
         public void AddOrder(Order order);
 
         public IQueryable<LineItem> LineItems { get; }

@@ -1,0 +1,114 @@
+@using IntexII.ViewModels;
+@model OrdersListViewModel
+
+<h1>Manage Orders</h1>    
+
+<div>
+  <form method="post" asp-controller="Admin" asp-action="ChangePageSize">
+    Records per Page:
+    <select name="pageSize" onchange="this.form.submit()">
+        <!option value="50" @(Model.PaginationInfo.ItemsPerPage == 50 ? "selected" : "")>50</!option>
+        <!option value="100" @(Model.PaginationInfo.ItemsPerPage == 100 ? "selected" : "")>100</!option>
+        <!option value="500" @(Model.PaginationInfo.ItemsPerPage == 500 ? "selected" : "")>500</!option>
+    </select>
+  </form>
+</div>
+<div class="scroll-container">
+    <table>
+      <thead>
+        <th>Transaction ID</th>
+        <th>Customer ID</th>
+        <th>Order Date</th>
+        <th>Day of Week</th>
+        <th>Time</th>
+        <th>Entry Mode</th>
+        <th>Amount</th>
+        <th>Transaction Type</th>
+        <th>Country of Transaction</th>
+        <th>Shipping Address</th>
+        <th>Bank</th>
+        <th>Card Type</th>
+        <th>Fraud</th>
+      </thead>
+      <tbody>
+        @foreach (var o in @Model.Orders)
+      {
+        <tr>
+          <td>@o.TransactionId</td>
+          <td>@o.CustomerId</td>
+          <td>@o.OrderDate</td>
+          <td>@o.DayOfWeek</td>
+          <td>@o.Time</td>
+          <td>@o.EntryMode</td>
+          <td>@o.Amount</td>
+          <td>@o.TypeOfTransaction</td>
+          <td>@o.CountryOfTransaction</td>
+          <td>@o.ShippingAddress</td>
+          <td>@o.Bank</td>
+          <td>@o.TypeOfCard</td>
+          @if (@o.Fraud == 1) 
+            {
+              <td>Yes</td>
+            }
+          else 
+            {
+              <td>No</td>
+            }
+          
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>    
+
+      @* <div page-model="@Model.PaginationInfo" page-action="ManageOrders"
+        page-classes-enabled="true" page-class="btn"
+        page-class-normal="btn-outline-dark"
+        page-class-selected="btn-primary"
+        class="btn-group pull-right m-1"></div> *@
+
+<div class="pagination-container">
+    <div page-model="@Model.PaginationInfo"
+         page-action="ManageOrders"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right m-1">
+    </div>
+</div>
+
+<style>
+  .pagination-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.pagination-links a {
+    display: inline-block;
+    margin-right: 5px; /* Adjust spacing between pagination links */
+}
+
+    .scroll-container {
+        height: 70vh; /* Set the desired height */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9;
+        font-weight: bold;
+    }
+</style>

@@ -39,6 +39,10 @@
         {
             return _context.Orders.Where(o => o.CustomerId == customerId);
         }
+        public IQueryable<Order> GetFraudOrders()
+        {
+            return _context.Orders.Where(o => o.Fraud == 1);
+        }
         public void AddOrder(Order order)
         {
             _context.Add(order);
