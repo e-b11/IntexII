@@ -54,10 +54,20 @@ public class AdminController : Controller
       var products = _repo.Products.ToList();
       return View(products);
     }
+    public IActionResult AddProduct()
+    {
+      return View("Product");
+    }
     [HttpGet]
     public IActionResult EditProduct(int productId)
     {
       var product = _repo.Products.Single(p => p.ProductId == productId);
-      return View(product);
+      return View("Product", product);
+    }
+    [HttpPost]
+    public IActionResult EditProduct(Product product)
+    {
+      _repo.EditProduct(product);
+      return RedirectToAction("ManageProducts");
     }
 }

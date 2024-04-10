@@ -5,8 +5,10 @@
         public IQueryable<Customer> Customers { get; }
         // public Customer getCustomerById(int customerId);
         public IQueryable<Product> Products { get; }
-        //public List<Product> getAllProducts();
-        // public Product getProductById(int productId);
+        public void AddProduct(Product product);
+        public Product GetProductById(int productId);
+        public void EditProduct(Product product);
+        public void DeleteProduct(Product product);
         public IQueryable<Order> Orders { get; }
         // public List<Order> getAllOrders();
         // public List<Order> getOrdersForCustomer(int customerId);

@@ -1,0 +1,44 @@
+@model List<Product>
+
+<h1 class="mb-4">Manage Products</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Year</th>
+                <th>Number of Parts</th>
+                <th>Price</th>
+                <th>Image Link</th>
+                <th>Primary Color</th>
+                <th>Secondary Color</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.ProductId</td>
+                    <td>@p.ProductName</td>
+                    <td>@p.Year</td>
+                    <td>@p.NumParts</td>
+                    <td>@p.Price</td>
+                    <td>@p.ImgLink</td>
+                    <td>@p.PrimaryColor</td>
+                    <td>@p.SecondaryColor</td>
+                    <td>@p.ProductDescription</td>
+                    <td>@p.Category</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@p.ProductId" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Admin" asp-action="ConfirmDeleteProduct" asp-route-id="@p.ProductId" class="btn btn-danger ml-2">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -6,8 +6,6 @@ namespace IntexII.Models
     {
         public IntexContext(DbContextOptions<IntexContext> options) : base(options) { }
 
-        // public DbSet<AspNetUser> Users { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Product> Products { get; set; }
