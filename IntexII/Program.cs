@@ -28,8 +28,13 @@ builder.Services.AddScoped<IIntexRepository, EFIntexRepository>();
 builder.Services.AddRazorPages();
 
 //Uncomment these as things are built
-//builder.Services.AddDistributedMemoryCache();
-//builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout to 30 minutes
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 //builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -65,6 +70,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute("pagenumandtype", "{category}/Page{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
 app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });

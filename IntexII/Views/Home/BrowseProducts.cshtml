@@ -7,6 +7,17 @@
 
 <div class="row m-1 p-1">
     <div class="col-3">
+        <form method="post" asp-action="ChangePageSize">
+            Page Size:
+            <select name="pageSize" onchange="this.form.submit()">
+                <!option value="5" @(Model.PaginationInfo.ItemsPerPage == 5 ? "selected" : "")>5</!option>
+                <!option value="10" @(Model.PaginationInfo.ItemsPerPage == 10 ? "selected" : "")>10</!option>
+                <!option value="20" @(Model.PaginationInfo.ItemsPerPage == 20 ? "selected" : "")>20</!option>
+
+            </select>
+        </form>
+        <br/>
+        <vc:colors/>
         <vc:categories/>
     </div>
     <div class="container col-9">

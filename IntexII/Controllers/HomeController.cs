@@ -33,14 +33,18 @@ namespace IntexII.Controllers
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         //}
 
-        public IActionResult BrowseProducts(string? category, int pageNum = 1)
+        public IActionResult BrowseProducts(string? category, string? color, int pageNum = 1)
         {
-            int pageSize = 5;
+            int defaultPageSize = 5;
+
+            int pageSize = HttpContext.Session.GetInt32("pageSize") ?? defaultPageSize;
+
 
             var products = new ProductsListViewModel
             {
                 Products = _repo.Products
-                    .Where(x => x.Category == category || category == null)
+                    .Where(x => (x.Category == category || category == null) &&
+                        (color == null || x.PrimaryColor == color || x.SecondaryColor == color))
                     .OrderBy(x => x.ProductId)
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
@@ -52,12 +56,23 @@ namespace IntexII.Controllers
                     TotalItems = category == null ? _repo.Products.Count() : _repo.Products.Where(x => x.Category == category).Count()
                 },
 
-                CurrentCategory = category
+                CurrentCategory = category,
+                CurrentColor = color
             };
             
             //var products = _repo.Products;
             
             return View(products);
+        }
+
+        [HttpPost]
+        public IActionResult ChangePageSize(int pageSize)
+        {
+            // Validate and set the pageSize into session
+            HttpContext.Session.SetInt32("pageSize", pageSize);
+
+            // Redirect back to the Index action or wherever appropriate
+            return RedirectToAction("BrowseProducts");
         }
 
         public IActionResult SingleProduct(int productId)

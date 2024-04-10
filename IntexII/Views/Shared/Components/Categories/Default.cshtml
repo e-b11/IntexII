@@ -1,6 +1,7 @@
 ﻿@using System.Collections
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    Category
 *@
 @{
 }
@@ -11,6 +12,6 @@
     <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="BrowseProducts" asp-route-category="" asp-route-pageNum="">Home</a>
     @foreach (string c in Model ?? Enumerable.Empty<string>())
     {
-        <a class="btn @(c == ViewBag.SelectedProjectType ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-category="@c" asp-route-pageNum="1">@c</a>
+        <a class="btn @(c == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-category="@c" asp-route-pageNum="1">@c</a>
     }
 </div>
