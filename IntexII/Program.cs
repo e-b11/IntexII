@@ -36,7 +36,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-//builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -73,10 +73,10 @@ app.UseAuthorization();
 
 app.UseSession();
 
-app.MapControllerRoute("pagenumandtype", "{category}/Page{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
-app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
-app.MapControllerRoute("category", "{category}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
-app.MapControllerRoute("pagination", "Products/Page{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+app.MapControllerRoute("pagenumandtype", "Products/{category}/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
+app.MapControllerRoute("page", "Products/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+app.MapControllerRoute("category", "Products/{category}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+app.MapControllerRoute("pagination", "Products/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
 
 app.MapDefaultControllerRoute();
 

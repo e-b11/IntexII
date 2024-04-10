@@ -53,15 +53,15 @@ namespace IntexII.Controllers
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = category == null ? _repo.Products.Count() : _repo.Products.Where(x => x.Category == category).Count()
+                    TotalItems = (category == null && color == null) ? _repo.Products.Count() : _repo.Products.Where(x => (x.Category == category || category == null) &&
+                        (color == null || x.PrimaryColor == color || x.SecondaryColor == color)).Count()
                 },
 
                 CurrentCategory = category,
                 CurrentColor = color
             };
             
-            //var products = _repo.Products;
-            
+           
             return View(products);
         }
 

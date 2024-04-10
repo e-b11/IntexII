@@ -28,8 +28,14 @@
             <p>@Model.NumParts</p>
         </div>
         <div>
-            <a href="#" class="btn">Add to Cart</a>
             <p class="btn">@Model.Price.ToString("c")</p>
+
+            <form id="@Model.ProductId" method="post" asp-page="/Cart">
+                <input type="hidden" asp-for="ProductId" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit" class="btn-outline-primary btn-sm">Add to Cart</button>
+
+            </form>
         </div>
 
     </div>
