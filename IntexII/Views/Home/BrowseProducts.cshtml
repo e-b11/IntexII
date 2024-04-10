@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Products";
+}
+@model IQueryable<Product>
+
+<h1 class="text-center">Products</h1>
+
+<div class="row m-1 p-1">
+    <div class="col-3">
+        <p>Filter goes here</p>
+    </div>
+    <div class="container col-9">
+        <main role="main" class="pb-3">
+            
+            @foreach(var p in Model){
+                <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId" class="card">
+                    <img src="@p.ImgLink" alt="@p.ProductName" width="500" height="636"
+                         loading="lazy">
+                    <p>@p.ProductName</p>
+                </a>
+            }
+
+
+        </main>
+    </div>
+</div>
