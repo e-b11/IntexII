@@ -1,0 +1,18 @@
+@model ApplicationUser;
+
+<h1>Edit User</h1>
+
+<form asp-controller="Admin" asp-action="EditUser" method="post">
+  <p>User ID: @Model.Id</p>
+  <label asp-for="Email">Email</label>
+  <input asp-for="Email" type="text">@Model.Email</input>
+  @* <label asp-for="PasswordHash">@Model.PasswordHash</label> *@
+  @* <label asp-for="CustomerId">@Model.CustomerId</label> *@
+  <label>Role (not actually built yet)</label>
+  <select name="Roles" id="roleselect" >
+    <option value="Admin">Admin</option>
+    <option value="Customer">Customer</option>
+  </select>
+
+  <button class="btn btn-primary" type="submit">Save Changes</button>
+</form>
