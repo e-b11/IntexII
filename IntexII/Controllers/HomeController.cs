@@ -1,5 +1,7 @@
 using IntexII.Models;
+using IntexII.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.ProjectModel;
 using System.Diagnostics;
 
 namespace IntexII.Controllers
@@ -16,8 +18,8 @@ namespace IntexII.Controllers
 
         public IActionResult Index()
         {
-            var products = _repo.Products;
-            return View(products);
+            //var products = _repo.Products;
+            return View();
         }
 
         public IActionResult Privacy()
@@ -25,15 +27,35 @@ namespace IntexII.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
 
-        public IActionResult BrowseProducts()
+        public IActionResult BrowseProducts(string? category, int pageNum = 1)
         {
-            var products = _repo.Products;
+            int pageSize = 5;
+
+            var products = new ProductsListViewModel
+            {
+                Products = _repo.Products
+                    .Where(x => x.Category == category || category == null)
+                    .OrderBy(x => x.ProductId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = category == null ? _repo.Products.Count() : _repo.Products.Where(x => x.Category == category).Count()
+                },
+
+                CurrentCategory = category
+            };
+            
+            //var products = _repo.Products;
             
             return View(products);
         }

@@ -32,7 +32,7 @@ builder.Services.AddRazorPages();
 //builder.Services.AddSession();
 
 //builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
-//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -66,9 +66,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute("pagenumandtype", "{category}/Page{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
+app.MapControllerRoute("page", "Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+app.MapControllerRoute("category", "{category}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+app.MapControllerRoute("pagination", "Products/Page{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+
+app.MapDefaultControllerRoute();
+
 app.MapRazorPages();
 
 app.Run();

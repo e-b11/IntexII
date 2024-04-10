@@ -1,18 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Products";
 }
-@model IQueryable<Product>
+@model ProductsListViewModel
 
 <h1 class="text-center">Products</h1>
 
 <div class="row m-1 p-1">
     <div class="col-3">
-        <p>Filter goes here</p>
+        <vc:categories/>
     </div>
     <div class="container col-9">
         <main role="main" class="pb-3">
             
-            @foreach(var p in Model){
+            @foreach(var p in Model.Products){
                 <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId" class="card">
                     <img src="@p.ImgLink" alt="@p.ProductName" width="500" height="636"
                          loading="lazy">
@@ -20,6 +20,12 @@
                 </a>
             }
 
+            <div page-model="@Model.PaginationInfo" page-action="BrowseProducts"
+                 page-classes-enabled="true" page-class="btn"
+                 page-class-normal="btn-outline-dark"
+                 page-class-selected="btn-primary"
+                 page-url-category="@Model.CurrentCategory"
+                 class="btn-group pull-right m-1"></div>
 
         </main>
     </div>
