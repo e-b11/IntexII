@@ -90,4 +90,26 @@ app.MapDefaultControllerRoute();
 
 app.MapRazorPages();
 
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await SeedRolesAsync(userManager, roleManager);
+    // await SeedAdminUserAsync(userManager, roleManager);
+}
+async Task SeedRolesAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+{
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        var adminRole = new IdentityRole("Admin");
+        await roleManager.CreateAsync(adminRole);
+    }
+    if (!await roleManager.RoleExistsAsync("User"))
+    {
+        var userRole = new IdentityRole("User");
+        await roleManager.CreateAsync(userRole);
+    }
+}
+
 app.Run();
