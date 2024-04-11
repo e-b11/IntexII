@@ -1,10 +1,12 @@
-﻿namespace IntexII.Models
+﻿using IntexII.Data;
+
+namespace IntexII.Models
 {
     public class EFIntexRepository : IIntexRepository
     {
-        private IntexContext _context;
+        private ApplicationDbContext _context;
 
-        public EFIntexRepository(IntexContext temp)
+        public EFIntexRepository(ApplicationDbContext temp)
         {
             _context = temp;
         }
