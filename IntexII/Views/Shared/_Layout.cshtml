@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/IntexII.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
+    
+
 </head>
 <body>
 <header>
@@ -36,6 +39,9 @@
                     </li>
                 </ul>
                 <partial name="_LoginPartial" />
+                <div class="col-6 navbar-text text-end">
+                    <vc:cart-summary />
+                </div>
             </div>
         </div>
     </nav>

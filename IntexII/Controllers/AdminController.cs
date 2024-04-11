@@ -203,94 +203,16 @@ public class AdminController : Controller
     }
     
     public IActionResult ReviewOrders()
-{
-	var records = _repo.Orders
-		.OrderByDescending(o => o.OrderDate)
-		.Take(20)
-		.ToList(); //Fetch the 20 most recent records
-	var predictions = new List<OrderPrediction>(); //ViewModel for the view
+    {
+        var records = _repo.Orders
+            .Where(o => o.FraudFlag == "Fraud")
+            .OrderByDescending(o => o.OrderDate);
+		     //Fetch the 20 most recent records
+	    
 
-	//Dictionary mapping the numeric prediction to an animal type
-	var classTypeDict = new Dictionary<int, string>
-	{
-		{ 0, "Not Fraud" },
-		{ 1, "Fraud" }
-	};
+	    
 
-	foreach (var record in records)
-	{
-		//Calculate days since Jan 1 2022
-		var january12022 = new DateTime(2022, 1, 1);
-		var daysSinceJan2022 = Math.Abs((record.OrderDate - january12022).Days);
-
-
-		//preprocess features to make them compatible with the model
-
-		var input = new List<float>
-			{
-				record.CustomerId,
-				record.Time,
-				//fix amount if it’s null
-				(float)(record.Amount),
-
-				//fix date
-				daysSinceJan2022,
-
-				//check the dummy coded data
-				record.DayOfWeek == "Mon" ? 1 : 0,
-				record.DayOfWeek == "Sat" ? 1 : 0,
-				record.DayOfWeek == "Sun" ? 1 : 0,
-				record.DayOfWeek == "Thu" ? 1 : 0,
-				record.DayOfWeek == "Tue" ? 1 : 0,
-				record.DayOfWeek == "Wed" ? 1 : 0,
-
-				record.EntryMode == "Pin" ? 1 : 0,
-				record.EntryMode == "Tap" ? 1 : 0,
-
-				record.TypeOfTransaction == "Online" ? 1 : 0,
-				record.TypeOfTransaction == "POS" ? 1 : 0,
-
-				record.CountryOfTransaction == "India" ? 1 : 0,
-				record.CountryOfTransaction == "Russia" ? 1 : 0,
-				record.CountryOfTransaction == "USA" ? 1 : 0,
-				record.CountryOfTransaction == "UnitedKingdom" ? 1 : 0,
-
-				//use countryoftransaction if shipping address is null
-				(record.ShippingAddress ?? record.CountryOfTransaction) == "India" ? 1 : 0,
-				(record.ShippingAddress ?? record.CountryOfTransaction) == "Russia" ? 1 : 0,
-				(record.ShippingAddress ?? record.CountryOfTransaction) == "USA" ? 1 : 0,
-				(record.ShippingAddress ?? record.CountryOfTransaction) == "UnitedKingdom" ? 1 : 0,
-
-				record.Bank == "HSBC" ? 1 : 0,
-				record.Bank == "Halifax" ? 1 : 0,
-				record.Bank == "Lloyds" ? 1 : 0,
-				record.Bank == "Metro" ? 1 : 0,
-				record.Bank == "Monzo" ? 1 : 0,
-				record.Bank == "RBS" ? 1 : 0,
-
-				record.TypeOfCard == "Visa" ? 1 : 0
-
-
-			};
-		var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
-
-		var inputs = new List<NamedOnnxValue>
-		{
-			NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
-		};
-		string predictionResult = null;
-		using (var results = _session.Run(inputs))
-		{
-			var prediction = results.FirstOrDefault(item => item.Name == "output_label")?.AsTensor<long>()
-				.ToArray();
-			predictionResult = prediction != null && prediction.Length > 0 ? classTypeDict.GetValueOrDefault((int)prediction[0], "Unknown") : "Error in prediction";
-		}
-
-		predictions.Add(new OrderPrediction { Orders = record, Prediction = predictionResult });
-
-	}
-
-	return View(predictions);
-}
+	    return View(records);
+    }
 
 }
