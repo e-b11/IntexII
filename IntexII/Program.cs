@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
@@ -24,8 +25,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
 {
-    microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
-    microsoftOptions.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
+    //microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
+    microsoftOptions.ClientId = Environment.GetEnvironmentVariable("CLIENT_ID");
+    //microsoftOptions.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
+    microsoftOptions.ClientSecret = Environment.GetEnvironmentVariable("CLIENT_SECRET");
 });
 
 
@@ -70,6 +73,14 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//CSP Header
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'");
+    await next();
+});
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

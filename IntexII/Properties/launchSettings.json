@@ -1,31 +1,25 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:33792",
-      "sslPort": 44334
-    }
-  },
+{
   "profiles": {
     "http": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5173",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5173"
     },
     "https": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7240;http://localhost:5173",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CLIENT_ID": "c5c2c3ac-7fca-4d43-b70c-f1c6730e3af2",
+        "CLIENT_SECRET": "h5Q8Q~v.5TWJD58wvAhXBlH6z0XGyOCKLCt5Zach",
+        "CONNECTION_STRING": "Server=tcp:myfreesqldbserverbastian.database.windows.net,1433;Initial Catalog=myFreeDB;Persist Security Info=False;User ID=ebastian;Password=4baTHnd2UxStLaW;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7240;http://localhost:5173"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -33,6 +27,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:33792",
+      "sslPort": 44334
     }
   }
 }
