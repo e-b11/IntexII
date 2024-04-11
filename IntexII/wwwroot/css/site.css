@@ -30,7 +30,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    
 }
 
 img,
@@ -44,7 +45,7 @@ svg {
 }
 
 input,
-button,
+button,content,
 textarea,
 select {
     font: inherit;
@@ -149,9 +150,14 @@ aside {
     text-decoration: none;
     color: var(--misty-violet);
     font-size: 1.5rem;
+    font-family: Playfair Display;
 }
 
-.card:hover {
+/*.card:hover {
     background-color: rgb(0 0 0 / 10%);
     font-weight: bold;
+}*/
+
+.bordered-image {
+    border: 2px solid black; /* Adjust the width and color as needed */
 }
