@@ -4,79 +4,84 @@
 
 @model CheckoutViewModel
 
-<h2>Check out now</h2>
+<div class="container">
+    <main role="main" class="pb-3">
+        <h2>Check out now</h2>
 
-<p>Please fill out the details below:</p>
+        <p>Please fill out the details below:</p>
 
-<div asp-validation-summary="All" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
 
-<form asp-action="Checkout" method="post">
-    <input type="hidden" asp-for="Order.TransactionId"/>
-    <input type="hidden" asp-for="Order.CustomerId" value="1" />
-    <input type="hidden" asp-for="Order.OrderDate" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
-    <input type="hidden" asp-for="Order.DayOfWeek" value="@DateTime.Now.ToString("ddd")" />
-    <input type="hidden" asp-for="Order.Time" value="@DateTime.Now.ToString("HH")" />
-    <input type="hidden" asp-for="Order.EntryMode" value="CVC" />
-    <input type="hidden" asp-for="Order.TypeOfTransaction" value="Online" />
+        <form asp-action="Checkout" method="post">
+            <input type="hidden" asp-for="Order.TransactionId"/>
+            <input type="hidden" asp-for="Order.CustomerId" value="1" />
+            <input type="hidden" asp-for="Order.OrderDate" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
+            <input type="hidden" asp-for="Order.DayOfWeek" value="@DateTime.Now.ToString("ddd")" />
+            <input type="hidden" asp-for="Order.Time" value="@DateTime.Now.ToString("HH")" />
+            <input type="hidden" asp-for="Order.EntryMode" value="CVC" />
+            <input type="hidden" asp-for="Order.TypeOfTransaction" value="Online" />
 
-    <h3>Shipping</h3>
+            <h3>Shipping</h3>
     
-    <div class="form-group">
-        <label>Country:</label>
-        <input asp-for="Order.ShippingAddress" class="form-control" />
-    </div>
-    <h3>Payment Information</h3>
-    <div class="form-group">
-        <label>Country of Transaction:</label>
-        <input asp-for="Order.CountryOfTransaction" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Bank:</label>
-        <input asp-for="Order.Bank" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Card Type:</label>
-        <input asp-for="Order.TypeOfCard" class="form-control" />
-    </div>
+            <div class="form-group">
+                <label>Country:</label>
+                <input asp-for="Order.ShippingAddress" class="form-control" />
+            </div>
+            <h3>Payment Information</h3>
+            <div class="form-group">
+                <label>Country of Transaction:</label>
+                <input asp-for="Order.CountryOfTransaction" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Bank:</label>
+                <input asp-for="Order.Bank" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Card Type:</label>
+                <input asp-for="Order.TypeOfCard" class="form-control" />
+            </div>
 
 
    
-    <br />
+            <br />
     
-    <div class="text-center">
-        <input class="btn btn-primary" type="submit"
-               value="Complete Order" />
-    </div>
-</form>
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit"
+                       value="Complete Order" />
+            </div>
+        </form>
 
-@* <table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th class="text-right">Amount</th>
-            <th class="text-right">Subtotal</th>
-        </tr>
-    </thead>
+        @* <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Amount</th>
+                    <th class="text-right">Subtotal</th>
+                </tr>
+            </thead>
 
-    <tbody>
-        @foreach (var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
-        {
-            <tr>
-                <td class="text-left">@l.Product.ProductName</td>
-                <td class="text-center">@l.Quantity</td>
-                <td class="text-right">@l.Product.Price.ToString("c")</td>
-                <td class="text-right">@((l.Quantity * l.Product.Price).ToString("c"))</td>
+            <tbody>
+                @foreach (var l in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td class="text-left">@l.Product.ProductName</td>
+                        <td class="text-center">@l.Quantity</td>
+                        <td class="text-right">@l.Product.Price.ToString("c")</td>
+                        <td class="text-right">@((l.Quantity * l.Product.Price).ToString("c"))</td>
                 
-            </tr>
-        }
-    </tbody>
+                    </tr>
+                }
+            </tbody>
 
-    <tfoot>
-        <tr>
-            <td colspan="3" class="text-right">Total</td>
-            <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td>
-        </tr>
-    </tfoot>
-</table> *@
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total</td>
+                    <td class="text-right">@Model.Cart?.CalculateTotal().ToString("c")</td>
+                </tr>
+            </tfoot>
+        </table> *@
+        
+    </main>
+</div>

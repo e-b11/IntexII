@@ -3,40 +3,46 @@
 @{
     ViewData["Title"] = Model.ProductName;
 }
-<div class="row">
-    <div class="col">
-        <img src="@Model.ImgLink" alt="@Model.ProductName" />
-    </div>
-    <div class="col">
-        <h2>@Model.ProductName</h2>
-        <div>
-            <h4>Description</h4>
-            <p>@Model.ProductDescription</p>
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="row">
+            <div class="col">
+                <img src="@Model.ImgLink" alt="@Model.ProductName" />
+            </div>
+            <div class="col">
+                <h2>@Model.ProductName</h2>
+                <div>
+                    <h4>Description</h4>
+                    <p>@Model.ProductDescription</p>
 
-        </div>
-        <div>
-            <p>Colors</p>
-            <p>@Model.PrimaryColor</p>
-            <p>@Model.SecondaryColor</p>
-        </div>
-        <div>
-            <p>Year</p>
-            <p>@Model.Year</p>
-        </div>
-        <div>
-            <p>Parts</p>
-            <p>@Model.NumParts</p>
-        </div>
-        <div>
-            <p class="btn">@Model.Price.ToString("c")</p>
+                </div>
+                <div>
+                    <p>Colors</p>
+                    <p>@Model.PrimaryColor</p>
+                    <p>@Model.SecondaryColor</p>
+                </div>
+                <div>
+                    <p>Year</p>
+                    <p>@Model.Year</p>
+                </div>
+                <div>
+                    <p>Parts</p>
+                    <p>@Model.NumParts</p>
+                </div>
+                <div>
+                    <p class="btn">@Model.Price.ToString("c")</p>
 
-            <form id="@Model.ProductId" method="post" asp-page="/Cart">
-                <input type="hidden" asp-for="ProductId" />
-                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                <button type="submit" class="btn-outline-primary btn-sm">Add to Cart</button>
+                    <form id="@Model.ProductId" method="post" asp-page="/Cart">
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <button type="submit" class="btn-outline-primary btn-sm">Add to Cart</button>
 
-            </form>
+                    </form>
+                </div>
+
+            </div>
         </div>
-
-    </div>
+        
+    </main>
 </div>
+
