@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Checkout";
+}
+
+@model Order
+
+<h2>Check out now</h2>
+
+<p>Please fill out the details below:</p>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+
+<form asp-action="Checkout" method="post">
+    <input type="hidden" asp-for="TransactionId"/>
+    <input type="hidden" asp-for="CustomerId" value="1" />
+    <input type="hidden" asp-for="OrderDate" value="@DateTime.Now.ToString("MM/dd/yyyy")"/>
+    <input type="hidden" asp-for="DayOfWeek" value="@DateTime.Now.ToString("ddd")" />
+    <input type="hidden" asp-for="Time" value="@DateTime.Now.ToString("HH")" />
+    <input type="hidden" asp-for="EntryMode" value="CVC"/>
+    <input type="hidden" asp-for="TypeOfTransaction" value="Online"/>
+
+    <h3>Shipping</h3>
+    
+    <div class="form-group">
+        <label>Country:</label>
+        <input asp-for="ShippingAddress" class="form-control" />
+    </div>
+    <h3>Payment Information</h3>
+    <div class="form-group">
+        <label>Country of Transaction:</label>
+        <input asp-for="CountryOfTransaction" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Bank:</label>
+        <input asp-for="Bank" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Card Type:</label>
+        <input asp-for="TypeOfCard" class="form-control" />
+    </div>
+
+
+   
+    <br />
+    
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit"
+               value="Complete Order" />
+    </div>
+</form>

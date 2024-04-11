@@ -7,5 +7,6 @@
 
         public string? CurrentCategory {  get; set;}
         public string? CurrentColor { get; set;}
+
     }
 }

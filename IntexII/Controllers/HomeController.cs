@@ -2,18 +2,21 @@ using IntexII.Models;
 using IntexII.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.ProjectModel;
+using NuGet.Protocol.Core.Types;
 using System.Diagnostics;
 
 namespace IntexII.Controllers
 {
     public class HomeController : Controller
     {
-        
-        private IIntexRepository _repo;
 
-        public HomeController(IIntexRepository temp)
+        private IIntexRepository _repo;
+        private Cart cart;
+
+        public HomeController(IIntexRepository temp, Cart cartservice)
         {
             _repo = temp;
+            cart = cartservice;
         }
 
         public IActionResult Index()
@@ -60,8 +63,8 @@ namespace IntexII.Controllers
                 CurrentCategory = category,
                 CurrentColor = color
             };
-            
-           
+
+
             return View(products);
         }
 
@@ -83,17 +86,41 @@ namespace IntexII.Controllers
             return View(singleProduct);
         }
 
-        public ViewResult Checkout()
-        {
-            var checkoutDetails = new CheckoutViewModel
-            {
-                Order = new Order(),
+        //[HttpGet]
+        //public IActionResult Checkout()
+        //{
+        //    var checkoutDetails = new CheckoutViewModel
+        //    {
+        //        Order = new Order(),
 
-                Lines = new List<Cart.CartLine>(),
-            };
+        //        Lines = new List<Cart.CartLine>(),
+
+        //        Cart = cart,
+        //    };
 
 
-            return View(checkoutDetails);
-        }
+        //    return View("Checkout", checkoutDetails);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Checkout(CheckoutViewModel checkout)
+        //{
+        //    if (cart.Lines.Count() == 0)
+        //    {
+        //        ModelState.AddModelError("",
+        //            "Sorry, your cart is empty!");
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        checkout.Lines = cart.Lines.ToArray();
+        //        _repo.AddOrder(checkout.Order);
+        //        cart.Clear();
+        //        return View("OrderConfirmation", checkout);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

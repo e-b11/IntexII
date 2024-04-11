@@ -1,16 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static IntexII.Models.Cart;
 
 namespace IntexII.Models
 {
     public class Order
-    {
+    { 
         [Key]
         public int TransactionId { get; set; }
         [Required]
         [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public Customer? Customer { get; set; }
+
         [Required]
         public DateTime OrderDate {  get; set; }
         [Required]

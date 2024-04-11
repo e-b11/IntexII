@@ -31,6 +31,7 @@ builder.Services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
 
 builder.Services.AddScoped<IIntexRepository, EFIntexRepository>();
 
+
 builder.Services.AddRazorPages();
 
 //Uncomment these as things are built
