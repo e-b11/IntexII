@@ -15,6 +15,8 @@
         public IQueryable<Order> GetCustomerOrders(int customerId);
         public IQueryable<Order> GetFraudOrders();
         public void AddOrder(Order order);
+        public void EditOrder(Order order);
+        public Order GetOrderById(int orderId);
 
         public IQueryable<LineItem> LineItems { get; }
         public void AddLineItem(LineItem lineItem);

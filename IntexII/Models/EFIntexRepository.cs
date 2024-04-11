@@ -50,6 +50,15 @@ namespace IntexII.Models
             _context.Add(order);
             _context.SaveChanges();
         }
+        public void EditOrder(Order order)
+        {
+            _context.Update(order);
+            _context.SaveChanges();
+        }
+        public Order GetOrderById(int id)
+        {
+            return _context.Orders.Single(o => o.TransactionId == id);
+        }
         public IQueryable<LineItem> LineItems => _context.LineItems;
         public void AddLineItem(LineItem lineItem)
         {
