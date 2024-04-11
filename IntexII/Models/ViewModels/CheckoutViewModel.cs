@@ -7,7 +7,7 @@ namespace IntexII.Models.ViewModels
         public Order Order { get; set; } = new Order();
         public ICollection<LineItem> LineItems { get; set; } = new List<LineItem>();
 
-        //public Cart? Cart { get; set; }
-        //public SessionCart? SessionCart { get; set; }
+        public Cart? Cart { get; set; }
+        
     }
 }

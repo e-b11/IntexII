@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using IntexII.Models;
+using IntexII.Models.ViewModels;
 
 namespace IntexII.Controllers
 {
@@ -15,12 +16,17 @@ namespace IntexII.Controllers
         }
         public IActionResult Checkout()
         {
-            return View(new Order());
+            var checkoutDetails = new CheckoutViewModel
+            {
+                Cart = cart
+            };
+            
+            return View(checkoutDetails);
 
         }
 
         [HttpPost]
-        public IActionResult Checkout(Order order)
+        public IActionResult Checkout(CheckoutViewModel checkoutDetails)
         {
             if (cart.Lines.Count()==0)
             {
@@ -28,10 +34,30 @@ namespace IntexII.Controllers
             }
             if (ModelState.IsValid)
             {
-                _repo.AddOrder(order);
+                checkoutDetails.Order.Amount = cart.CalculateTotal();
+
+
+                
+                _repo.AddOrder(checkoutDetails.Order);
+
+                foreach (var l in cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+                {
+                    var lineItem = new LineItem
+                    {
+                        TransactionId = checkoutDetails.Order.TransactionId,
+                        ProductId = l.Product.ProductId,
+                        Quantity = l.Quantity,
+
+                    };
+
+                    _repo.AddLineItem(lineItem);
+                }
+
+
+
                 cart.Clear();
 
-                return RedirectToPage("/OrderConfirmation", new { transactionId = order.TransactionId });        
+                return View("OrderConfirmation", checkoutDetails.Order);      
             }
             else
             {
