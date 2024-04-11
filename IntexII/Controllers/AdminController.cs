@@ -9,6 +9,7 @@ using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IntexII.Controllers;
 public class AdminController : Controller
@@ -31,10 +32,12 @@ public class AdminController : Controller
         _session = new InferenceSession(modelPath);
     }
 
+    [Authorize(Roles = "Admin")]
     public IActionResult Home()
     {
       return View("AdminHome");
     }
+    [Authorize(Roles = "Admin")]
     public IActionResult ManageUsers()
     {
         // Retrieve all users from the database
@@ -43,6 +46,7 @@ public class AdminController : Controller
         // Pass the list of users to the view
         return View(users);
     }
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> EditUser(string id)
     {
@@ -69,8 +73,7 @@ public class AdminController : Controller
         return View(model);
     }
 
-
-
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> EditUser(EditUserViewModel model)
     {
@@ -102,11 +105,13 @@ public class AdminController : Controller
       return RedirectToAction("ManageUsers");
     }
 
+    [Authorize(Roles = "Admin")]
     public IActionResult ConfirmDeleteUser(string id)
     {
       var user = _userManager.Users.Single(u => u.Id == id);
       return View(user);
     }
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> DeleteUser(string Id)
     {
@@ -130,47 +135,54 @@ public class AdminController : Controller
       }
     }
 
-
-
+    [Authorize(Roles = "Admin")]
     public IActionResult ManageProducts()
     {
       var products = _repo.Products.ToList();
       return View(products);
     }
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public IActionResult AddProduct()
     {
       return View("Product", new Product());
     }
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public IActionResult AddProduct(Product product)
     {
       _repo.AddProduct(product);
       return RedirectToAction("ManageProducts");
     }
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public IActionResult EditProduct(int id)
     {
       var product = _repo.Products.Single(p => p.ProductId == id);
       return View("Product", product);
     }
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public IActionResult EditProduct(Product product)
     {
       _repo.EditProduct(product);
       return RedirectToAction("ManageProducts");
     }
+    [Authorize(Roles = "Admin")]
     public IActionResult ConfirmDeleteProduct(int id)
     {
       var product = _repo.Products.Single(p => p.ProductId == id);
       return View(product);
     }
+
+    [Authorize(Roles = "Admin")]
     public IActionResult DeleteProduct(Product product)
     {
       _repo.DeleteProduct(product);
       return RedirectToAction("ManageProducts");
     }
 
+    [Authorize(Roles = "Admin")]
     public IActionResult ManageOrders(int pageNum = 1)
     {
       int defaultPageSize = 50;
@@ -201,7 +213,7 @@ public class AdminController : Controller
         // Redirect back to the Index action or wherever appropriate
         return RedirectToAction("ManageOrders");
     }
-    
+    [Authorize(Roles = "Admin")]
     public IActionResult ReviewOrders()
     {
         var records = _repo.Orders
