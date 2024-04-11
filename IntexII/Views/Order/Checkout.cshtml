@@ -12,7 +12,7 @@
 
 
 <form asp-action="Checkout" method="post">
-     <input type="hidden" asp-for="Order.TransactionId"/>
+    <input type="hidden" asp-for="Order.TransactionId"/>
     <input type="hidden" asp-for="Order.CustomerId" value="1" />
     <input type="hidden" asp-for="Order.OrderDate" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
     <input type="hidden" asp-for="Order.DayOfWeek" value="@DateTime.Now.ToString("ddd")" />

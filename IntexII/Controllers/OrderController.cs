@@ -34,13 +34,6 @@ namespace IntexII.Controllers
             }
             if (ModelState.IsValid)
             {
-                //checkoutDetails.Order.CustomerId = 1;
-                //checkoutDetails.Order.OrderDate = DateTime.Now.Date;
-                //checkoutDetails.Order.DayOfWeek = DateTime.Now.ToString("ddd");
-                //checkoutDetails.Order.Time = DateTime.Now.Hour;
-                //checkoutDetails.Order.EntryMode = "CVC";
-                //checkoutDetails.Order.TypeOfTransaction = "Online";
-
                 checkoutDetails.Order.Amount = cart.CalculateTotal();
 
 
