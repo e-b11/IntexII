@@ -1,9 +1,19 @@
-@model List<Order>
+@model List<IntexII.Models.OrderPrediction>
+
+@{
+    ViewData["Title"] = "Predictions";
+
+    var classTypeDict = new Dictionary<int, string>
+    {
+        { 0, "Not Fraud" },
+        { 1, "Fraud" }
+    };
+}
 
 <h1>Review Orders</h1>
 
 <table>
-  <thead>
+    <thead>
     <th>Transaction ID</th>
     <th>Customer ID</th>
     <th>Order Date</th>
@@ -16,26 +26,29 @@
     <th>Shipping Address</th>
     <th>Bank</th>
     <th>Card Type</th>
-    <th>Actions</th>
-  </thead>
-  <tbody>
+    <th>Fraud</th>
+    <th>Fraud Prediction</th>
+    </thead>
+    <tbody>
     @foreach (var o in Model)
-      {
+    {
         <tr>
-          <td>@o.TransactionId</td>
-          <td>@o.CustomerId</td>
-          <td>@o.OrderDate</td>
-          <td>@o.DayOfWeek</td>
-          <td>@o.Time</td>
-          <td>@o.EntryMode</td>
-          <td>@o.Amount</td>
-          <td>@o.TypeOfTransaction</td>
-          <td>@o.CountryOfTransaction</td>
-          <td>@o.ShippingAddress</td>
-          <td>@o.Bank</td>
-          <td>@o.TypeOfCard</td>
-          <td><a asp-controller="Admin" asp-action="ReviewOrder" asp-route-id="@o.TransactionId">Review Order</a></td>         
+            <td>@o.Orders.TransactionId</td>
+            <td>@o.Orders.CustomerId</td>
+            <td>@o.Orders.OrderDate</td>
+            <td>@o.Orders.DayOfWeek</td>
+            <td>@o.Orders.Time</td>
+            <td>@o.Orders.EntryMode</td>
+            <td>@o.Orders.Amount</td>
+            <td>@o.Orders.TypeOfTransaction</td>
+            <td>@o.Orders.CountryOfTransaction</td>
+            <td>@o.Orders.ShippingAddress</td>
+            <td>@o.Orders.Bank</td>
+            <td>@o.Orders.TypeOfCard</td>
+            <td>@o.Orders.Fraud</td>
+            <td>@o.Prediction</td>
+            <td><a asp-controller="Admin" asp-action="ReviewOrders" asp-route-id="@o.Orders.TransactionId">Review Order</a></td>         
         </tr>
-      }
-  </tbody>
+    }
+    </tbody>
 </table>
