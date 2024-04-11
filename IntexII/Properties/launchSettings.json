@@ -16,7 +16,9 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "CLIENT_ID": "c5c2c3ac-7fca-4d43-b70c-f1c6730e3af2",
         "CLIENT_SECRET": "h5Q8Q~v.5TWJD58wvAhXBlH6z0XGyOCKLCt5Zach",
-        "CONNECTION_STRING": "Server=tcp:myfreesqldbserverbastian.database.windows.net,1433;Initial Catalog=myFreeDB;Persist Security Info=False;User ID=ebastian;Password=4baTHnd2UxStLaW;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+        "CONNECTION_STRING": "Server=tcp:myfreesqldbserverbastian.database.windows.net,1433;Initial Catalog=myFreeDB;Persist Security Info=False;User ID=ebastian;Password=4baTHnd2UxStLaW;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+        "GOOGLE_CLIENT_ID": "670484964397-eoe6kgu482r83g5fl0k1gaiatj7tdiq4.apps.googleusercontent.com",
+        "GOOGLE_CLIENT_SECRET": "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"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7240;http://localhost:5173"
