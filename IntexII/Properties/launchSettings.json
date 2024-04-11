@@ -13,10 +13,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "CLIENT_ID": "c5c2c3ac-7fca-4d43-b70c-f1c6730e3af2",
-        "CLIENT_SECRET": "h5Q8Q~v.5TWJD58wvAhXBlH6z0XGyOCKLCt5Zach",
-        "CONNECTION_STRING": "Server=tcp:myfreesqldbserverbastian.database.windows.net,1433;Initial Catalog=myFreeDB;Persist Security Info=False;User ID=ebastian;Password=4baTHnd2UxStLaW;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7240;http://localhost:5173"
