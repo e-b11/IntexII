@@ -1,0 +1,8 @@
+@model Order
+
+<h1>Review Order</h1>
+
+<form asp-controller="Admin" asp-action="ReviewOrder" method="post">
+  <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
