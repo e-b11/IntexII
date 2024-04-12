@@ -29,6 +29,7 @@
         
         
 </div>
+<br /><br />
 <br/>
     <div class="trending-products">
         <div class="brickwell-heading">
@@ -39,27 +40,27 @@
             <vc:product-list products="@ViewBag.TopProducts"/>
         </div>
     </div>
-<br/>  
+<br/>  <br /><br />
 <div class="hero">
     <picture>
         <img src="img/legomoviecity.jpeg"
              alt="Legos of many colors scattered on floor">
     </picture>
     <div class="hero-text-wrapper">
-        <h1>Aurora's Collection</h1>
+        <h1 style="color: white; text-shadow: black 1px 1px 1px">Aurora's Collection</h1>
         <p>
             <a class=".herobutton" asp-controller="Home" asp-action="BrowseProducts"><em>SHOP NOW</em></a>
         </p>
         <br/>
     </div>
 </div>
-<br/>
+<br/><br /><br />
 <div class="recommended-products">
         <div>
             @if (User.Identity.IsAuthenticated)
             {
                 <div>
-                    <img src="~/img/heartlego-01.png" alt="lego" class="brickwell-logo">
+                    <img src="~/img/heartlego-01.png" alt="lego" class="brickwell-logo" style="display: inline;">
                     <h3 style="text-align: center; font-size: 3.5em;">Recommended For You</h3>
                 </div>
                 
@@ -67,8 +68,8 @@
             else
             {
                 <div class="brickwell-heading">
-                    <img src="~/img/heartlego-01.png" alt="lego" class="brickwell-logo">
-                    <h3>We're loving it</h3>
+                    <img src="~/img/heartlego-01.png" alt="lego" class="brickwell-logo" style="display: inline;">
+                    <h3 style="display: inline;">We're loving it</h3>
                 </div>
 
             }
@@ -77,9 +78,5 @@
             <vc:product-list products="@ViewBag.RecommendedProducts"/>
         </div>
     </div>
+    <br /><br />
 
-
-@* @foreach (var p in Model) 
-{
-    <h1>@p.ProductName</h1>
-} *@

@@ -227,3 +227,8 @@ aside {
     border-color: #FEC107; /* Change border color to yellow */
     color: black; /* Change text color */
 }
+
+.privacy {
+    text-decoration: none;
+    color: black;
+}
