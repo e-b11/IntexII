@@ -42,7 +42,7 @@ namespace IntexII.Controllers
 
             // List to hold recommended products
             List<Product> recommendedProducts = new List<Product>();
-            List<int> productsWeLike = new List<int> {2, 34, 1, 13, 32};
+            List<int> productsWeLike = new List<int> {2, 32, 34, 1, 13};
             recommendedProducts = GetProducts(productsWeLike);
 
             // Check if user is authenticated
