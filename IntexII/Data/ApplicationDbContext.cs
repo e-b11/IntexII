@@ -52,11 +52,11 @@ namespace IntexII.Data
                 entity.Property(e => e.Age)
                     .IsRequired();
 
-                entity.Property(e => e.Rec1);
-                entity.Property(e => e.Rec2);
-                entity.Property(e => e.Rec3);
-                entity.Property(e => e.Rec4);
-                entity.Property(e => e.Rec5);
+                // entity.Property(e => e.Rec1);
+                // entity.Property(e => e.Rec2);
+                // entity.Property(e => e.Rec3);
+                // entity.Property(e => e.Rec4);
+                // entity.Property(e => e.Rec5);
 
                 
                 entity.HasOne(c => c.ApplicationUser)
