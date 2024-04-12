@@ -1,0 +1,23 @@
+.brickwell-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.brickwell-logo {
+    height: 80px;
+    width: auto;
+    margin-right: 5px;
+}
+
+.brickwell-header h2 {
+    margin: 0;
+    font-size: 3em;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

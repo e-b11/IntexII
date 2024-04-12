@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
     <link rel="stylesheet" href="~/css/products.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/_Layout.css" asp-append-version="true" />
     
 
 </head>
@@ -69,15 +70,16 @@
     </div>
 
     <footer class="site-footer">
-        
+        <div class="brickwell-header">
+                <img src="img/brickwelllogo.png" alt="Brickwell Logo" class="brickwell-logo">
+                <h2>Brickwell</h2>
+        </div>
         <div class="container">
             &copy; 2024 - IntexII - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-
-        
-            
-        </div> 
-        <img class="picture" src="~/img/footer.png" />
+        </div>
+        <img class="picture" src="~/img/footer.png"/>
     </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var cookieConsentElement = document.getElementById("cookieConsent");
