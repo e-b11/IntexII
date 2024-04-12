@@ -19,17 +19,23 @@ namespace IntexII.Controllers
             cart = cartservice;
         }
 
+        public List<Product> GetProducts(int[] productIds)
+        {
+            List<Product> Products = new List<Product>();
+            foreach (int id in productIds)
+            {
+                Product product = _repo.GetProductById(id);
+                Products.Add(product);
+            }
+            return Products;
+        }
+
         public IActionResult Index()
         {
             //var products = _repo.Products;
             int[] topProductIds = [23,19,21,22,20];
-            var topProducts = new List<Product>();
-            foreach (int id in topProductIds)
-            {
-                Product product = _repo.GetProductById(id);
-                topProducts.Add(product);
-            }
-            ViewBag.TopProducts = topProducts;
+            
+            ViewBag.TopProducts = GetProducts(topProductIds);
             
             return View();
         }

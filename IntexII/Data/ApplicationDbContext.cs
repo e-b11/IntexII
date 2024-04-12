@@ -19,6 +19,8 @@ namespace IntexII.Data
 
         public DbSet<LineItem> LineItems { get; set; }
 
+        public DbSet<CustomerRecs> CustomerRecs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -52,11 +54,6 @@ namespace IntexII.Data
                 entity.Property(e => e.Age)
                     .IsRequired();
 
-                // entity.Property(e => e.Rec1);
-                // entity.Property(e => e.Rec2);
-                // entity.Property(e => e.Rec3);
-                // entity.Property(e => e.Rec4);
-                // entity.Property(e => e.Rec5);
 
                 
                 entity.HasOne(c => c.ApplicationUser)
@@ -198,6 +195,16 @@ namespace IntexII.Data
                     .WithMany()
                     .HasForeignKey(e => e.ProductId)
                     .OnDelete(DeleteBehavior.Restrict); // Specify delete behavior if needed
+            });
+
+            builder.Entity<CustomerRecs>(entity =>
+            {
+                entity.HasKey(e => e.CustomerId);
+                entity.Property(e => e.Rec1);
+                entity.Property(e => e.Rec2);
+                entity.Property(e => e.Rec3);
+                entity.Property(e => e.Rec4);
+                entity.Property(e => e.Rec5);
             });
 
         }
