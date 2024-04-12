@@ -30,7 +30,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    margin-bottom: 0px;
     
 }
 
@@ -57,10 +57,15 @@ main {
     max-width: 70rem;
 }
 
-article,
+.content {
+    flex: 1; /* Allow the content to grow to fill the available space */
+}
+
+
+/*article,
 aside {
     margin-bottom: 4em;
-}
+}*/
 
 aside {
     margin-left: 1em;
@@ -159,5 +164,31 @@ aside {
 }*/
 
 .bordered-image {
-    border: 2px solid black; /* Adjust the width and color as needed */
+    border: 20px solid #FEC107; /* Adjust the width and color as needed */
+}
+
+.container2 {
+    text-align: center;
+}
+
+.container img {
+    display: inline-block;
+}
+
+.full-width-image {
+    width: 100%;
+}
+
+.site-footer {
+    padding-top: 150px; /* Adjust the padding value as needed */
+    flex-shrink: 0;
+    padding-left: 0;
+    padding-right: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+
+.site-footer .container {
+    text-align: center;
 }
