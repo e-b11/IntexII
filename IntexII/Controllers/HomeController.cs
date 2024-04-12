@@ -1,9 +1,11 @@
 using IntexII.Models;
 using IntexII.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.ProjectModel;
 using NuGet.Protocol.Core.Types;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace IntexII.Controllers
 {
@@ -12,14 +14,16 @@ namespace IntexII.Controllers
 
         private IIntexRepository _repo;
         private Cart cart;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(IIntexRepository temp, Cart cartservice)
+        public HomeController(IIntexRepository temp, Cart cartservice, UserManager<ApplicationUser> usermanager)
         {
             _repo = temp;
             cart = cartservice;
+            _userManager = usermanager;
         }
 
-        public List<Product> GetProducts(int[] productIds)
+        public List<Product> GetProducts(List<int> productIds)
         {
             List<Product> Products = new List<Product>();
             foreach (int id in productIds)
@@ -30,15 +34,41 @@ namespace IntexII.Controllers
             return Products;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //var products = _repo.Products;
-            int[] topProductIds = [23,19,21,22,20];
-            
+            // List of top rated product IDs
+            List<int> topProductIds = new List<int> { 23, 19, 21, 22, 20 };
             ViewBag.TopProducts = GetProducts(topProductIds);
-            
+
+            // List to hold recommended products
+            List<Product> recommendedProducts = new List<Product>();
+            List<int> productsWeLike = new List<int> {2, 32, 34, 1, 13};
+            recommendedProducts = GetProducts(productsWeLike);
+
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                // Get the user's ID
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Access the user's attributes (e.g., CustomerId)
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                int? customerId = user.CustomerId;
+
+                // If user has a customerId
+                if (customerId.HasValue)
+                {
+                    List<int> recProductIds = _repo.GetCustomerRecsForCustomer(customerId.Value);
+                    recommendedProducts = GetProducts(recProductIds);
+                }
+            }
+
+            // Pass recommended products to the view
+            ViewBag.RecommendedProducts = recommendedProducts;
+
             return View();
         }
+
 
         public IActionResult AboutUs()
         {
@@ -59,7 +89,7 @@ namespace IntexII.Controllers
 
         public IActionResult BrowseProducts(string? category, string? color, int pageNum = 1)
         {
-            int defaultPageSize = 6;
+            int defaultPageSize = 9;
 
             int pageSize = HttpContext.Session.GetInt32("pageSize") ?? defaultPageSize;
 

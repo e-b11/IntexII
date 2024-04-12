@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-
+    ViewData["Title"] = "About Us";
 }
 <html lang="en">
 <head>
@@ -13,7 +13,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    
+    <div class="hero">
+        <picture>
+            <source media="(min-width: 801px)" srcset="~/img/legowoverlaybanner-2000px.jpg" />
+            <source media="(min-width: 401px)" srcset="~/img/lego-hero-800px.jpg" />
+            <source media="(max-width: 400px)" srcset="~/img/lego-hero-400px.jpg" />
+            <img src="images/hero-breakfast-800px.jpg"
+                 alt="Legos of many colors scattered on floor">
+        </picture>
+        <div class="hero-text-wrapper" style="inset: 0;">
+            <h2>About Us</h2>
+        </div>
+    </div>
+
     <br />
 
     <div class="container">
