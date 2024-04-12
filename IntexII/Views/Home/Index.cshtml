@@ -24,10 +24,32 @@
     <main role="main" class="pb-3">
        
     </main>
-    <div>
-        <h3>Trending Products</h3>
+    <div class="trending-products">
+        <div>
+            <h3>Trending Products</h3>
+        </div>
+        <div>
+            <vc:product-list products="@ViewBag.TopProducts"/>
+        </div>
     </div>
-        <vc:product-list products="@ViewBag.TopProducts"/>
+    
+        
+    <div class="recommended-products">
+        <div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <h3>Recommended For You</h3>
+            }
+            else
+            {
+                <h3>We're Loving</h3>
+            }
+        </div>
+        <div>
+            <vc:product-list products="@ViewBag.RecommendedProducts"/>
+        </div>
+    </div>
+    
 </div>
 
 
