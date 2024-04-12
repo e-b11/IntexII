@@ -22,12 +22,29 @@ namespace IntexII.Controllers
             _environment = environment;
 
             // Combine the base path with the relative path to your ONNX file
-            string modelPath = Path.Combine(_environment.ContentRootPath, "decision_tree_model.onnx");
+            //string modelPath = Path.Combine(_environment.ContentRootPath, "decision_tree_model.onnx");
+            string modelPath;
+
+            if (_environment.IsDevelopment())
+            {
+                // Development environment
+                modelPath = Path.Combine(_environment.ContentRootPath, "decision_tree_model.onnx");
+            }
+            else
+            {
+                // Production environment (deployed to Azure)
+                // Adjust the path based on the specific deployment environment in Azure
+                // For example, if the file is deployed with the application, you can use a relative path
+                modelPath = Path.Combine(_environment.ContentRootPath, "wwwroot", "decision_tree_model.onnx");
+
+            }
+
             _session = new InferenceSession(modelPath);
 
         }
 
         [Authorize(Roles = "User")]
+        [HttpGet]
         public IActionResult Checkout()
         {
             var checkoutDetails = new CheckoutViewModel

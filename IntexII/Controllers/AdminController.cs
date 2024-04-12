@@ -17,19 +17,15 @@ public class AdminController : Controller
     private IIntexRepository _repo;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly InferenceSession _session;
-    private readonly IWebHostEnvironment _environment;
+    
     
 
-    public AdminController(UserManager<ApplicationUser> userManager, IIntexRepository temp, IWebHostEnvironment environment, RoleManager<IdentityRole> roleManager)
+    public AdminController(UserManager<ApplicationUser> userManager, IIntexRepository temp, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _repo = temp;
-        _environment = environment;
-        // Combine the base path with the relative path to your ONNX file
-        string modelPath = Path.Combine(_environment.ContentRootPath, "decision_tree_model.onnx");
-        _session = new InferenceSession(modelPath);
+        
     }
 
     [Authorize(Roles = "Admin")]
