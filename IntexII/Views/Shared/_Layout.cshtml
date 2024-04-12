@@ -40,14 +40,18 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="BrowseProducts">Products</a>
                     </li>
                 </ul>
-                <partial name="_LoginPartial" />
                 <div class="col-6 navbar-text text-end">
-                    <vc:cart-summary />
+                    <div class="d-flex justify-content-end align-items-center">
+                        <vc:cart-summary />
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
+    <div class="black-bar"></div>
 </header>
+
 
     @{
         var cookieConsent = Context.Request.Cookies.TryGetValue("CookieConsent", out var consent) && consent == "true";
