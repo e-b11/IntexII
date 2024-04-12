@@ -47,6 +47,18 @@
                             <label asp-for="Input.Gender">Gender</label>
                             <span asp-validation-for="Input.Gender" class="text-danger"></span>
                         </div>
+                        <div class="form-floating mb-3">
+                            @* <input asp-for="Input.CountryOfResidence" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" /> *@
+                            <select asp-for="Input.CountryOfResidence" class="form-control">
+                                <option value="USA">USA</option>
+                                <option value="United Kingddom">United Kingddom</option>
+                                <option value="Russia">Russia</option>
+                                <option value="China">Chine</option>
+                                <option value="India">India</option>
+                            </select>
+                            <label asp-for="Input.CountryOfResidence">Country</label>
+                            <span asp-validation-for="Input.CountryOfResidence" class="text-danger"></span>
+                        </div>
 
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
@@ -72,6 +84,9 @@
                             <label asp-for="Input.Email">Email</label>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
+                        <br>
+                        <br>
+                        <br>
                         <div class="form-floating mb-3">
                             <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                             <label asp-for="Input.ConfirmPassword">Confirm Password</label>
