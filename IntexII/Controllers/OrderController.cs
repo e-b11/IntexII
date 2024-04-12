@@ -5,6 +5,7 @@ using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.AspNetCore.Identity;
 
 namespace IntexII.Controllers
 {
@@ -14,12 +15,14 @@ namespace IntexII.Controllers
         private Cart cart;
         private readonly InferenceSession _session;
         private readonly IWebHostEnvironment _environment;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrderController(IIntexRepository temp, Cart cartService, IWebHostEnvironment environment)
+        public OrderController(IIntexRepository temp, Cart cartService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             _repo = temp;
             cart = cartService;
             _environment = environment;
+            _userManager = userManager;
 
             string modelPath;
 
@@ -53,7 +56,7 @@ namespace IntexII.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(CheckoutViewModel checkoutDetails)
+        public async Task<IActionResult> CheckoutAsync(CheckoutViewModel checkoutDetails)
         {
 
 
@@ -78,6 +81,17 @@ namespace IntexII.Controllers
 
                 checkoutDetails.Order.Amount = cart.CalculateTotal();
 
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                int? customerId = user.CustomerId;
+                if (customerId.HasValue)
+                {
+                    checkoutDetails.Order.CustomerId = user.CustomerId.Value;
+                }
+                else
+                {
+                    checkoutDetails.Order.CustomerId= 1;
+                }
+                
 
                 var input = new List<float>
                     {
