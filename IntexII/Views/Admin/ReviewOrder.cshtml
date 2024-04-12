@@ -4,6 +4,15 @@
     ViewData["Title"] = "Review Order - " + Model.TransactionId;
 }
 
+<style>
+  @* .button-holder {
+  display: flex !important;
+  justify-content: center;
+  gap: 20px; /* Adjust the space between buttons */
+} *@
+
+</style>
+
 <h1 class="text-center">Review Order</h1>
 
 
@@ -43,46 +52,60 @@
     </table>
 </div>
 
-<div class="text-center" class="button-container">
-  <form asp-controller="Admin" asp-action="BlockOrder" method="post">
-  <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
-  <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId">
-  <input type="hidden" asp-for="OrderDate" value="@Model.OrderDate">
-  <input type="hidden" asp-for="DayOfWeek" value="@Model.DayOfWeek">
-  <input type="hidden" asp-for="Time" value="@Model.Time">
-  <input type="hidden" asp-for="EntryMode" value="@Model.EntryMode">
-  <input type="hidden" asp-for="Amount" value="@Model.Amount">
-  <input type="hidden" asp-for="TypeOfTransaction" value="@Model.TypeOfTransaction">
-  <input type="hidden" asp-for="CountryOfTransaction" value="@Model.CountryOfTransaction">
-  <input type="hidden" asp-for="ShippingAddress" value="@Model.ShippingAddress">
-  <input type="hidden" asp-for="Bank" value="@Model.Bank">
-  <input type="hidden" asp-for="TypeOfCard" value="@Model.TypeOfCard">
+<div class="text-center" class="button-holder">
+  <div>
+    <a class="btn btn-primary" asp-controller="Admin" asp-action="ReviewOrders">Back</a>
+  </div>
+  
+  <div>
+    <form asp-controller="Admin" asp-action="BlockOrder" method="post">
+      <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
+      <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId">
+      <input type="hidden" asp-for="OrderDate" value="@Model.OrderDate">
+      <input type="hidden" asp-for="DayOfWeek" value="@Model.DayOfWeek">
+      <input type="hidden" asp-for="Time" value="@Model.Time">
+      <input type="hidden" asp-for="EntryMode" value="@Model.EntryMode">
+      <input type="hidden" asp-for="Amount" value="@Model.Amount">
+      <input type="hidden" asp-for="TypeOfTransaction" value="@Model.TypeOfTransaction">
+      <input type="hidden" asp-for="CountryOfTransaction" value="@Model.CountryOfTransaction">
+      <input type="hidden" asp-for="ShippingAddress" value="@Model.ShippingAddress">
+      <input type="hidden" asp-for="Bank" value="@Model.Bank">
+      <input type="hidden" asp-for="TypeOfCard" value="@Model.TypeOfCard">
 
-  <button type="submit" class="btn btn-primary">Block</button>
-</form>
-<form asp-controller="Admin" asp-action="ApproveOrder" method="post">
-  <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
-  <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId">
-  <input type="hidden" asp-for="OrderDate" value="@Model.OrderDate">
-  <input type="hidden" asp-for="DayOfWeek" value="@Model.DayOfWeek">
-  <input type="hidden" asp-for="Time" value="@Model.Time">
-  <input type="hidden" asp-for="EntryMode" value="@Model.EntryMode">
-  <input type="hidden" asp-for="Amount" value="@Model.Amount">
-  <input type="hidden" asp-for="TypeOfTransaction" value="@Model.TypeOfTransaction">
-  <input type="hidden" asp-for="CountryOfTransaction" value="@Model.CountryOfTransaction">
-  <input type="hidden" asp-for="ShippingAddress" value="@Model.ShippingAddress">
-  <input type="hidden" asp-for="Bank" value="@Model.Bank">
-  <input type="hidden" asp-for="TypeOfCard" value="@Model.TypeOfCard">
-  <button type="submit" class="btn btn-primary">Approve</button>
-</form>
+      <button type="submit" class="btn btn-danger">Block</button>
+    </form>
+  </div>
+
+  <div>
+    <form asp-controller="Admin" asp-action="ApproveOrder" method="post">
+      <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
+      <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId">
+      <input type="hidden" asp-for="OrderDate" value="@Model.OrderDate">
+      <input type="hidden" asp-for="DayOfWeek" value="@Model.DayOfWeek">
+      <input type="hidden" asp-for="Time" value="@Model.Time">
+      <input type="hidden" asp-for="EntryMode" value="@Model.EntryMode">
+      <input type="hidden" asp-for="Amount" value="@Model.Amount">
+      <input type="hidden" asp-for="TypeOfTransaction" value="@Model.TypeOfTransaction">
+      <input type="hidden" asp-for="CountryOfTransaction" value="@Model.CountryOfTransaction">
+      <input type="hidden" asp-for="ShippingAddress" value="@Model.ShippingAddress">
+      <input type="hidden" asp-for="Bank" value="@Model.Bank">
+      <input type="hidden" asp-for="TypeOfCard" value="@Model.TypeOfCard">
+      <button type="submit" class="btn btn-success">Approve</button>
+    </form>
+  </div>
 </div>
 
 <style>
-  .button-container {
-    display: flex ;
-    justify-content: space-around;
+  @* .button-holder {
+    display: inline-block !important;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
     align-items: center;
     width: 100%;
-  }
+  } *@
+  @* .button-holder div {
+      padding: 0 20px;
+    } *@
 </style>
 
