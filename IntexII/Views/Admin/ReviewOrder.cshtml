@@ -4,9 +4,55 @@
     ViewData["Title"] = "Review Order - " + Model.TransactionId;
 }
 
-<h1>Review Order</h1>
+<h1 class="text-center">Review Order</h1>
 
-<form asp-controller="Admin" asp-action="ReviewOrder" method="post">
+
+<div class="container">
+    <h1>Order Details</h1>
+    <table class="table table-bordered">
+      <thead>
+        <th scope="row">Transaction ID</th>
+        <th scope="row">Customer ID</th>
+        <th scope="row">Order Date</th>
+        <th scope="row">Day of Week</th>
+        <th scope="row">Time</th>
+        <th scope="row">Entry Mode</th>
+        <th scope="row">Amount</th>
+        <th scope="row">Type of Transaction</th>
+        <th scope="row">Country of Transaction</th>
+        <th scope="row">Shipping Address</th>
+        <th scope="row">Bank</th>
+         <th scope="row">Type of Card</th>
+      </thead>
+        <tbody>
+            <tr>    
+                <td>@Model.TransactionId</td>    
+                <td>@Model.CustomerId</td>
+                <td>@Model.OrderDate.ToShortDateString()</td>
+                <td>@Model.DayOfWeek</td>
+                <td>@Model.Time</td>
+                <td>@Model.EntryMode</td>
+                <td>@Model.Amount</td>
+                <td>@Model.TypeOfTransaction</td>          
+                <td>@Model.CountryOfTransaction</td>    
+                <td>@Model.ShippingAddress</td>
+                <td>@Model.Bank</td>
+                <td>@Model.TypeOfCard</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center">
+  <form asp-controller="Admin" asp-action="BlockOrder" method="post">
   <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Block</button>
 </form>
+<form asp-controller="Admin" asp-action="ApproveOrder" method="post">
+  <input type="hidden" asp-for="TransactionId" value="@Model.TransactionId">
+  <button type="submit" class="btn btn-primary">Approve</button>
+</form>
+</div>
+
+
+

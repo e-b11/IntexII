@@ -222,5 +222,26 @@ public class AdminController : Controller
 
 	    return View(records);
     }
-
+    [HttpGet]
+    public IActionResult ReviewOrder(int id)
+    {
+      Order order = _repo.GetOrderById(id);
+      return View(order);
+    }
+    [HttpPost]
+    public IActionResult ApproveOrder(Order order)
+    {
+      order.FraudFlag = "Not Fraud";
+      order.Fraud = 0;
+      _repo.EditOrder(order);
+      return RedirectToAction("ReviewOrders");
+    }
+    [HttpPost]
+    public IActionResult BlockOrder(Order order)
+    {
+      order.FraudFlag = "Not Fraud";
+      order.Fraud = 1;
+      _repo.EditOrder(order);
+      return RedirectToAction("ReviewOrders");
+    }
 }
