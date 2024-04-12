@@ -8,27 +8,26 @@
         <div class="row">
             <div class="col">
                 <img src="@Model.ImgLink" alt="@Model.ProductName" />
+                <div class="details">
+                    <div class="row">
+                        <h4>Colors</h4>
+                        <p>@Model.PrimaryColor, @Model.SecondaryColor</p>
+
+                        <h4>Parts</h4>
+                        <p>@Model.NumParts</p>
+                    </div>
+                </div>
             </div>
             <div class="col">
                 <h2>@Model.ProductName</h2>
+                <h4>@Model.Year</h4>
+                <br />
                 <div>
                     <h4>Description</h4>
                     <p>@Model.ProductDescription</p>
 
                 </div>
-                <div>
-                    <p>Colors</p>
-                    <p>@Model.PrimaryColor</p>
-                    <p>@Model.SecondaryColor</p>
-                </div>
-                <div>
-                    <p>Year</p>
-                    <p>@Model.Year</p>
-                </div>
-                <div>
-                    <p>Parts</p>
-                    <p>@Model.NumParts</p>
-                </div>
+
                 <div>
                     <p class="btn">@Model.Price.ToString("c")</p>
 

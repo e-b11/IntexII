@@ -120,7 +120,7 @@ aside {
 
 .hero a:hover {
     color: white;
-    background-color: black;
+    background-color: red;
 }
 
 /* Cards */
@@ -165,6 +165,7 @@ aside {
 
 .bordered-image {
     border: 20px solid #FEC107; /* Adjust the width and color as needed */
+    
 }
 
 .container2 {
@@ -191,4 +192,19 @@ aside {
 
 .site-footer .container {
     text-align: center;
+}
+
+.btn.btn-outline-secondary {
+    border-color: #000000; /* Set border color to black */
+    color: #000000; /* Set text color to black */
+}
+
+    .btn.btn-outline-secondary:hover {
+        background-color: #FEC107; /* Change background color to yellow on hover */
+    }
+
+.btn-primary {
+    background-color: #FEC107; /* Change background color to yellow */
+    border-color: #FEC107; /* Change border color to yellow */
+    color: black; /* Change text color */
 }
