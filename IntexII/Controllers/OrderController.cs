@@ -11,6 +11,7 @@ namespace IntexII.Controllers
 {
     public class OrderController : Controller
     {
+        //Create variable to store database info, identity info, and get variables for classification model
         private IIntexRepository _repo;
         private Cart cart;
         private readonly InferenceSession _session;
@@ -42,10 +43,11 @@ namespace IntexII.Controllers
 
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User")] //Only users can actually checkout
         [HttpGet]
         public IActionResult Checkout()
         {
+            //Create a new checkoutviewmodel and set the cart model in it to the current cart
             var checkoutDetails = new CheckoutViewModel
             {
                 Cart = cart
@@ -67,12 +69,9 @@ namespace IntexII.Controllers
             }
             if (ModelState.IsValid)
             {
-                //Calculate days since Jan 1 2022
-                //var january12022 = new DateTime(2022, 1, 1);
-                //var daysSinceJan2022 = Math.Abs((checkoutDetails.Order.OrderDate - january12022).Days);
-
-
-
+                
+                //Set up dictionary for values returned from fraud classification model. Calculate the total of the cart and set it for order. 
+                //Get the user information and use it to set customer id. If no customer assigned, default it to 1.
                 var classTypeDict = new Dictionary<int, string>
                 {
                     { 0, "Not Fraud" },
@@ -93,6 +92,7 @@ namespace IntexII.Controllers
                 }
                 
 
+                //Get inputs for model by dummy coding. 
                 var input = new List<float>
                     {
                         
@@ -141,6 +141,7 @@ namespace IntexII.Controllers
 
                     };
 
+                //Run model and return prediction of fraud or not fraud. Set new order FraudFlag column to that. 
                 var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
 
                 var inputs = new List<NamedOnnxValue>
@@ -148,7 +149,6 @@ namespace IntexII.Controllers
                     NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
                 };
                 string predictionResult = null;
-                //long predictionResultInt;
 
                 using (var results = _session.Run(inputs))
                 {
@@ -162,9 +162,10 @@ namespace IntexII.Controllers
                 checkoutDetails.Order.FraudFlag = predictionResult;
 
 
-                
+                //Save the order to the database
                 _repo.AddOrder(checkoutDetails.Order);
 
+                //save a lineitem to the database for each item in the cart
                 foreach (var l in cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
                 {
                     var lineItem = new LineItem

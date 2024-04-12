@@ -12,7 +12,7 @@
 
 <h1>Review Orders</h1>
 
-<table>
+<table class="table table-bordered">
     <thead>
     <th>Transaction ID</th>
     <th>Customer ID</th>
@@ -47,7 +47,7 @@
             <td>@o.TypeOfCard</td>
             <td>@o.Fraud</td>
             <td>@o.FraudFlag</td>
-            <td><a asp-controller="Admin" asp-action="ReviewOrders" asp-route-id="@o.TransactionId">Review Order</a></td>         
+            <td><a class="btn btn-primary" asp-controller="Admin" asp-action="ReviewOrder" asp-route-id="@o.TransactionId">Review Order</a></td>         
         </tr>
     }
     </tbody>

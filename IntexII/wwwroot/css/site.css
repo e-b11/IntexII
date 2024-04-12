@@ -78,8 +78,8 @@ aside {
 
 .hero h1 {
     font-size: clamp(3.5rem, 10vw + 1rem, 10rem);
-    text-shadow: black 2px 2px 3px;
-    color: white;
+    text-shadow: white 2px 2px 3px;
+    color: black;
 }
 
 .hero h2 {
@@ -226,4 +226,9 @@ aside {
     background-color: #FEC107; /* Change background color to yellow */
     border-color: #FEC107; /* Change border color to yellow */
     color: black; /* Change text color */
+}
+
+.privacy {
+    text-decoration: none;
+    color: black;
 }

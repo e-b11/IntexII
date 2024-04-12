@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">@p.ProductName</h5>
                                 <br />
-                                <button type="submit" class="btn-outline-primary btn-sm">Add to Cart</button>
+                                <a class="btn btn-primary" asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId">@p.Price.ToString("c")</a>
                             </div>
                         </div>
                     </div>
