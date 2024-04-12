@@ -195,10 +195,6 @@ aside {
     text-align: center;
 }
 
-.btn.btn-outline-secondary {
-    border-color: #000000; /* Set border color to black */
-    color: #000000; /* Set text color to black */
-}
 
     .btn.btn-outline-secondary:hover {
         background-color: #FEC107; /* Change background color to yellow on hover */
@@ -208,9 +204,4 @@ aside {
     background-color: #FEC107; /* Change background color to yellow */
     border-color: #FEC107; /* Change border color to yellow */
     color: black; /* Change text color */
-}
-
-.privacy {
-    text-decoration: none;
-    color: black;
 }

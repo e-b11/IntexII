@@ -21,3 +21,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.black-bar {
+    background-color: black;
+    height: 20px;
+    width: 100%;
+    margin-top: -20px; /* Adjust the margin to make it super close */
+    margin-bottom: 0; /* Remove any bottom margin */
+    padding: 0; /* Remove any padding */
+}

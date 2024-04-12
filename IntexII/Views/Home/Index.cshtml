@@ -20,14 +20,14 @@
     </div>
 </div>
 
-<div class="container">
-    <main role="main" class="pb-3">
-       
-    </main>
-    
-    
-</div>
-<div class="trending-products">
+    <div class="container">
+        <main role="main" class="pb-3">
+           
+        </main>
+        
+        
+    </div>
+    <div class="trending-products">
         <div>
             <h3>Trending Products</h3>
         </div>
@@ -36,8 +36,20 @@
         </div>
     </div>
     
+<div class="hero">
+    <picture>
+        <img src="img/legomoviecity.jpeg"
+             alt="Legos of many colors scattered on floor">
+    </picture>
+    <div class="hero-text-wrapper">
+        <h1>Aurora's Collection</h1>
+        <p>
+            <a class=".herobutton" asp-controller="Home" asp-action="BrowseProducts"><em>SHOP NOW</em></a>
+        </p>
+    </div>
+</div>
         
-    <div class="recommended-products">
+<div class="recommended-products">
         <div>
             @if (User.Identity.IsAuthenticated)
             {
