@@ -149,25 +149,20 @@ aside {
     margin-bottom: 1rem;
 }
 
-.card p {
-    font-family: Playfair Display;
-}
-
 .card {
     flex: 1 1 0;
     padding: 0.6rem;
     max-width: 1000px;
     transition: background-color 300ms ease, font-weight 300ms ease;
     text-decoration: none;
-    color: var(--misty-violet);
+    color: black;
     font-size: 1.5rem;
-    font-family: Playfair Display;
 }
 
-/*.card:hover {
+.card:hover {
     background-color: rgb(0 0 0 / 10%);
     font-weight: bold;
-}*/
+}
 
 .bordered-image {
     border: 20px solid #FEC107; /* Adjust the width and color as needed */
@@ -213,4 +208,9 @@ aside {
     background-color: #FEC107; /* Change background color to yellow */
     border-color: #FEC107; /* Change border color to yellow */
     color: black; /* Change text color */
+}
+
+.privacy {
+    text-decoration: none;
+    color: black;
 }

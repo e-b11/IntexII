@@ -10,7 +10,15 @@
     <main role="main" class="pb-3">
         <h2>Thank you for placing an order!</h2>
 
-        <p>Order #@Model.TransactionId will be shipped to you soon.</p>
+        @if (Model.FraudFlag == "Fraud"){
+            <p>Your order is currently under review. You will be notified when it is ready to be shipped.</p>
+        }
+        else
+        {
+            <p>Order #@Model.TransactionId will be shipped to you soon.</p>
+            
+        }
+
     </main>
 </div>
 
