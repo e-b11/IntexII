@@ -15,7 +15,7 @@
 
         <form asp-action="Checkout" method="post">
             <input type="hidden" asp-for="Order.TransactionId"/>
-            <input type="hidden" asp-for="Order.CustomerId" value="1" />
+            @* <input type="hidden" asp-for="Order.CustomerId" value="@" /> *@
             <input type="hidden" asp-for="Order.OrderDate" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
             <input type="hidden" asp-for="Order.DayOfWeek" value="@DateTime.Now.ToString("ddd")" />
             <input type="hidden" asp-for="Order.Time" value="@DateTime.Now.ToString("HH")" />
@@ -26,12 +26,26 @@
     
             <div class="form-group">
                 <label>Country:</label>
-                <input asp-for="Order.ShippingAddress" class="form-control" />
+                @* <input asp-for="Order.ShippingAddress" class="form-control" /> *@
+                <select asp-for="Order.ShippingAddress" class="form-control">
+                    <option value="USA">USA</option>
+                    <option value="United Kingddom">United Kingddom</option>
+                    <option value="Russia">Russia</option>
+                    <option value="China">Chine</option>
+                    <option value="India">India</option>
+                </select>
             </div>
             <h3>Payment Information</h3>
             <div class="form-group">
                 <label>Country of Transaction:</label>
-                <input asp-for="Order.CountryOfTransaction" class="form-control" />
+                @* <input asp-for="Order.CountryOfTransaction" class="form-control" /> *@
+                <select asp-for="Order.CountryOfTransaction" class="form-control">
+                    <option value="USA">USA</option>
+                    <option value="United Kingddom">United Kingddom</option>
+                    <option value="Russia">Russia</option>
+                    <option value="China">Chine</option>
+                    <option value="India">India</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Bank:</label>

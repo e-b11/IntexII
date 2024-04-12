@@ -29,7 +29,7 @@
                 </div>
 
                 <div>
-                    <p class="btn">@Model.Price.ToString("c")</p>
+                    <h4 class="btn">@Model.Price.ToString("c")</h4>
 
                     <form id="@Model.ProductId" method="post" asp-page="/Cart">
                         <input type="hidden" asp-for="ProductId" />
@@ -44,7 +44,7 @@
         
          <div class="row mt-5">
                      <div class="col">
-                         <h3>Top 5 Recommendations</h3>
+                         <h3>Similar Products</h3>
                          <div class="row">
                              <vc:product-list products="@ViewBag.TopRecommendations"/>
                          </div>

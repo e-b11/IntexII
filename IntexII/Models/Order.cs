@@ -26,13 +26,13 @@ namespace IntexII.Models
         public double Amount { get; set; }
         [Required]
         public string TypeOfTransaction { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The County of Transaction field is required.")]
         public string CountryOfTransaction { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Shipping Address Country field is required.")]
         public string ShippingAddress { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Bank field is required.")]
         public string Bank { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Type of Card field is required.")]
         public string TypeOfCard { get; set; }
         [Required]
         public int Fraud { get; set; }
