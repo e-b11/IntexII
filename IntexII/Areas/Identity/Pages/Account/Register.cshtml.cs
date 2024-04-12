@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using IntexII.Data;
 using IntexII.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -30,13 +31,15 @@ namespace IntexII.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace IntexII.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -98,6 +102,45 @@ namespace IntexII.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            // Additional fields for the Customer entity
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Birth Date")]
+            public DateTime BirthDate { get; set; }
+
+            [Required]
+            [Display(Name = "Country of Residence")]
+            public string CountryOfResidence { get; set; }
+
+            [Required]
+            [Display(Name = "Gender")]
+            public string Gender { get; set; }
+
+            [Required]
+            [Display(Name = "Age")]
+            public int Age { get; set; }
+            // {
+            //     get
+            //     {
+            //         // Calculate the age based on the BirthDate
+            //         var today = DateTime.Today;
+            //         var age = today.Year - BirthDate.Year;
+            //         if (BirthDate.Date > today.AddYears(-age))
+            //         {
+            //             age--; // Adjust age if the birthday hasn't occurred yet in the current year
+            //         }
+            //         return age;
+            //     }
+            // }
         }
 
 
@@ -121,11 +164,28 @@ namespace IntexII.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    
                     _logger.LogInformation("User created a new account with password.");
 
                     await _userManager.AddToRoleAsync(user, "User");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+                    // Create Customer entity
+                    var customer = new Customer
+                    {
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
+                        BirthDate = Input.BirthDate,
+                        CountryOfResidence = Input.CountryOfResidence,
+                        Gender = Input.Gender,
+                        Age = Input.Age
+                    };
+
+                    _context.Customers.Add(customer);
+                    await _context.SaveChangesAsync();
+
+                    user.CustomerId = customer.CustomerId;
+                    await _userManager.UpdateAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

@@ -23,5 +23,7 @@
 
         public IQueryable<CustomerRecs> CustomerRecs { get; }
         public List<int> GetCustomerRecsForCustomer(int id);
+
+        public bool CustomerHasRecs(int customerId);
     }
 }
