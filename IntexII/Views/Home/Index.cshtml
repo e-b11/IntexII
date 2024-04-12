@@ -4,6 +4,7 @@
 
 @model IQueryable<Product>;
 
+
 <div class="hero">
     <picture>
         <source media="(min-width: 801px)" srcset="~/img/legowoverlay2-2000px.jpg" />
@@ -17,25 +18,29 @@
         <p>
             <a class=".herobutton" asp-controller="Home" asp-action="BrowseProducts"><em>SHOP NOW</em></a>
         </p>
+        <br/>
+        <br/>
     </div>
 </div>
 
-    <div class="container">
-        <main role="main" class="pb-3">
+<div class="container">
+    <main role="main" class="pb-3">
            
-        </main>
+    </main>
         
         
-    </div>
+</div>
+<br/>
     <div class="trending-products">
-        <div>
+        <div class="brickwell-heading">
+            <img src="~/img/bricklego.png" alt="lego" class="brickwell-logo">
             <h3>Trending Products</h3>
         </div>
         <div>
             <vc:product-list products="@ViewBag.TopProducts"/>
         </div>
     </div>
-    
+<br/>  
 <div class="hero">
     <picture>
         <img src="img/legomoviecity.jpeg"
@@ -46,25 +51,33 @@
         <p>
             <a class=".herobutton" asp-controller="Home" asp-action="BrowseProducts"><em>SHOP NOW</em></a>
         </p>
+        <br/>
     </div>
 </div>
-        
+<br/>
 <div class="recommended-products">
         <div>
             @if (User.Identity.IsAuthenticated)
             {
-                <h3>Recommended For You</h3>
+                <div>
+                    <img src="~/img/heartlego-01.png" alt="lego" class="brickwell-logo">
+                    <h3 style="text-align: center; font-size: 3.5em;">Recommended For You</h3>
+                </div>
+                
             }
             else
             {
-                <h3>We're Loving</h3>
+                <div class="brickwell-heading">
+                    <img src="~/img/heartlego-01.png" alt="lego" class="brickwell-logo">
+                    <h3>We're loving it</h3>
+                </div>
+
             }
         </div>
         <div>
             <vc:product-list products="@ViewBag.RecommendedProducts"/>
         </div>
     </div>
-
 
 
 @* @foreach (var p in Model) 
