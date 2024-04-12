@@ -24,14 +24,19 @@
     </div>
     <div class="container col-9">
         <main role="main" class="pb-3">
-            
-            @foreach(var p in Model.Products){
-                <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId" class="card">
-                    <img src="@p.ImgLink" alt="@p.ProductName" width="500" height="636"
-                         loading="lazy">
-                    <p>@p.ProductName</p>
-                </a>
-            }
+
+            <div class="row">
+                @foreach (var p in Model.Products)
+                {
+                    <div class="col-md-4">
+                        <!-- Each product will take up 4 columns on medium-sized screens and larger -->
+                        <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId" class="card">
+                            <img src="@p.ImgLink" alt="@p.ProductName" class="img-fluid" loading="lazy">
+                            <p>@p.ProductName</p>
+                        </a>
+                    </div>
+                }
+            </div>
 
             <div page-model="@Model.PaginationInfo" page-action="BrowseProducts"
                  page-classes-enabled="true" page-class="btn"
