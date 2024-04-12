@@ -3,10 +3,128 @@
 @{
 }
 
+<style>
+    .container {
+        margin-top: 20px;
+    }
+    
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+        color: #333;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+    
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    
+    td {
+        border-bottom: 1px solid #f2f2f2;
+    }
+    
+    .btn-primary {
+        background-color: #f39c12;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-primary:hover {
+        background-color: #e67e22;
+    }
+    
+    .text-right {
+        text-align: right;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .card-deck {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+    
+    .card-deck {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+    
+    .card {
+        width: 12rem; /* Adjust the width as needed */
+        margin-bottom: 20px;
+    }
+    
+    .card-img-top {
+        height: 150px; /* Adjust the height as needed */
+        object-fit: cover;
+    }
+    
+    .card-body {
+        text-align: center;
+    }
+    
+    .card-title {
+        font-size: 1em; /* Adjust the font size as needed */
+        margin-bottom: 5px;
+    }
+    
+    .card-text {
+        font-size: 0.8em; /* Adjust the font size as needed */
+    }
+    
+
+
+
+</style>
+
+
+
 
 <div class="container">
     <main role="main" class="pb-3">
         <h2>Your Cart</h2>
+
+        <div class="card-deck">
+            @foreach(var l in Model.Cart?.Lines ?? Enumerable.Empty<Cart.CartLine>())
+            {
+                <div class="card">
+                    <img src="@l.Product.ImgLink" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@l.Product.ProductName</h5>
+                        <p class="card-text">Amount: @l.Product.Price.ToString("c")</p>
+                    </div>
+                </div>
+            }
+        </div>
 
         <table class="table table-bordered table-striped">
             <thead>
@@ -49,8 +167,7 @@
 
         <div class="text-center">
             <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Checkout</a>
-            <a class="btn btn-primary" href=@Model.ReturnUrl">Continue Shopping</a>
+            <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
         </div>
-        
     </main>
 </div>
