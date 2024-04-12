@@ -90,9 +90,12 @@ app.UseAuthorization();
 
 app.UseSession();
 
+app.MapControllerRoute("pagenumandtypeandcolor", "Products/{category}/{color}/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
 app.MapControllerRoute("pagenumandtype", "Products/{category}/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
+app.MapControllerRoute("pagenumandcolor", "Products/{color}/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts" });
 app.MapControllerRoute("page", "Products/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
 app.MapControllerRoute("category", "Products/{category}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
+app.MapControllerRoute("color", "Products/{color}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
 app.MapControllerRoute("pagination", "Products/Page/{pageNum}", new { Controller = "Home", Action = "BrowseProducts", pageNum = 1 });
 
 app.MapDefaultControllerRoute();

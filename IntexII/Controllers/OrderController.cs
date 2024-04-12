@@ -21,8 +21,6 @@ namespace IntexII.Controllers
             cart = cartService;
             _environment = environment;
 
-            // Combine the base path with the relative path to your ONNX file
-            //string modelPath = Path.Combine(_environment.ContentRootPath, "decision_tree_model.onnx");
             string modelPath;
 
             if (_environment.IsDevelopment())
@@ -32,9 +30,7 @@ namespace IntexII.Controllers
             }
             else
             {
-                // Production environment (deployed to Azure)
-                // Adjust the path based on the specific deployment environment in Azure
-                // For example, if the file is deployed with the application, you can use a relative path
+                // Production environment (deployed to Azure)              
                 modelPath = Path.Combine(_environment.ContentRootPath, "wwwroot", "decision_tree_model.onnx");
 
             }

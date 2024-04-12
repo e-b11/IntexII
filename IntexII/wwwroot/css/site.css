@@ -82,12 +82,18 @@ aside {
     color: white;
 }
 
+.hero h2 {
+    font-size: clamp(3.5rem, 10vw + 1rem, 5rem);
+    text-shadow: black 2px 2px 3px;
+    color: white;
+}
+
 .hero-text-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    inset: 50% 0 0 0;
+    inset: 40% 0 0 0;
     text-align: center;
 }
 
