@@ -10,6 +10,6 @@
 <div class="d-grid gap-2">
     @foreach (string c in Model ?? Enumerable.Empty<string>())
     {
-        <a class="btn @(c == ViewBag.SelectedColor ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-color="@c" asp-route-pageNum="1">@c</a>
+        <a class="btn @(c == ViewBag.SelectedColor ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-category="" asp-route-color="@c" asp-route-pageNum="1">@c</a>
     }
 </div>

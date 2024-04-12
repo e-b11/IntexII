@@ -78,8 +78,8 @@ aside {
 
 .hero h1 {
     font-size: clamp(3.5rem, 10vw + 1rem, 10rem);
-    text-shadow: black 2px 2px 3px;
-    color: white;
+    text-shadow: white 2px 2px 3px;
+    color: black;
 }
 
 .hero h2 {
@@ -98,8 +98,8 @@ aside {
 }
 
 .hero p {
-/*    color: black;
-*/    text-shadow: black 1px 1px 2px;
+    /*    color: black;
+    */    text-shadow: black 1px 1px 2px;
     font-size: clamp(0.2rem, 1vw + 0.75rem, 4rem);
 }
 
@@ -116,18 +116,40 @@ aside {
 
 .hero a {
     text-decoration: none;
-    background-color: white;
+    background-color: #FEC107; /* orange-yellow color */
     color: black;
-    padding: 0.2em 0.4em;
+    padding: 0.5em 1em;
     display: inline-block;
     transition: background-color 300ms ease, color 300ms ease;
     margin-top: 1em;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-style: normal; /* remove italic */
+    font-weight: bold; /* add bold */
 }
 
 .hero a:hover {
     color: white;
-    background-color: red;
+    background-color: #FFA500; /* darker shade of orange-yellow */
 }
+
+/* Images for titles recommender products*/
+.brickwell-heading {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.brickwell-heading img {
+    margin-right: 10px; /* Add some spacing between the image and text */
+}
+
+.brickwell-heading h3 {
+    font-size: 3.5em;
+    margin-bottom: 0; /* Remove default margin */
+}
+
+
 
 /* Cards */
 .sr-only {
