@@ -31,7 +31,14 @@
             <h3>Payment Information</h3>
             <div class="form-group">
                 <label>Country of Transaction:</label>
-                <input asp-for="Order.CountryOfTransaction" class="form-control" />
+                @* <input asp-for="Order.CountryOfTransaction" class="form-control" /> *@
+                <select asp-for="Order.CountryOfTransaction" class="form-control">
+                    <option value="USA">USA</option>
+                    <option value="United Kingddom">United Kingddom</option>
+                    <option value="Russia">Russia</option>
+                    <option value="China">Chine</option>
+                    <option value="India">India</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Bank:</label>

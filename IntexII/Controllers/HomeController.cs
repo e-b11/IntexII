@@ -56,12 +56,15 @@ namespace IntexII.Controllers
                 int? customerId = user.CustomerId;
 
                 // If user has a customerId
-                if (_repo.CustomerHasRecs(customerId.Value))
+                if (customerId.HasValue)
                 {
-                    if (true)
+                        if (_repo.CustomerHasRecs(customerId.Value))
                     {
-                        List<int> recProductIds = _repo.GetCustomerRecsForCustomer(customerId.Value);
-                        recommendedProducts = GetProducts(recProductIds);
+                        if (true)
+                        {
+                            List<int> recProductIds = _repo.GetCustomerRecsForCustomer(customerId.Value);
+                            recommendedProducts = GetProducts(recProductIds);
+                        }
                     }
                 }
             }
