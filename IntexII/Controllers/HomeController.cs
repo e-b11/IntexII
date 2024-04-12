@@ -93,6 +93,7 @@ namespace IntexII.Controllers
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         //}
 
+        //Get the category, color, page number as url parameters. Allow the user to filter by category or color and only pass those products to view
         public IActionResult BrowseProducts(string? category, string? color, int pageNum = 1)
         {
             int defaultPageSize = 9;
@@ -135,6 +136,7 @@ namespace IntexII.Controllers
             return RedirectToAction("BrowseProducts");
         }
 
+        //return the a single product to view along with recommendations for similar products
         public IActionResult SingleProduct(int productId)
         {
             var singleProduct = _repo.Products
@@ -160,41 +162,6 @@ namespace IntexII.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult Checkout()
-        //{
-        //    var checkoutDetails = new CheckoutViewModel
-        //    {
-        //        Order = new Order(),
-
-        //        Lines = new List<Cart.CartLine>(),
-
-        //        Cart = cart,
-        //    };
-
-
-        //    return View("Checkout", checkoutDetails);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Checkout(CheckoutViewModel checkout)
-        //{
-        //    if (cart.Lines.Count() == 0)
-        //    {
-        //        ModelState.AddModelError("",
-        //            "Sorry, your cart is empty!");
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        checkout.Lines = cart.Lines.ToArray();
-        //        _repo.AddOrder(checkout.Order);
-        //        cart.Clear();
-        //        return View("OrderConfirmation", checkout);
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
-        //}
+      
     }
 }
