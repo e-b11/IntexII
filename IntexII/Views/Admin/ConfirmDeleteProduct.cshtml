@@ -1,5 +1,9 @@
 @model Product
 
+@{
+    ViewData["Title"] = "Confirm Deletion";
+}
+
 <h2>Do you want to delete product: @Model.ProductName?</h2>
 
 <form asp-controller="Admin" asp-action="DeleteProduct" method="post">

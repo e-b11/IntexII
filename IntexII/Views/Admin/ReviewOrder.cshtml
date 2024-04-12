@@ -1,5 +1,9 @@
 @model Order
 
+@{
+    ViewData["Title"] = "Review Order - " + Model.TransactionId;
+}
+
 <h1>Review Order</h1>
 
 <form asp-controller="Admin" asp-action="ReviewOrder" method="post">

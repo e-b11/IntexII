@@ -1,5 +1,9 @@
 @model ApplicationUser
 
+@{
+    ViewData["Title"] = "Confirm Deletion";
+}
+
 <h2>Do you want to delete @Model.Email?</h2>
 
 <form asp-controller="Admin" asp-action="DeleteUser" method="post">
