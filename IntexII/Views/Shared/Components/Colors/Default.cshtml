@@ -8,8 +8,8 @@
 @model IQueryable<string>
 
 <div class="d-grid gap-2">
-    @foreach (string co in Model ?? Enumerable.Empty<string>())
+    @foreach (string c in Model ?? Enumerable.Empty<string>())
     {
-        <a class="btn @(co == ViewBag.SelectedColor ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-color="@co" asp-route-pageNum="1">@co</a>
+        <a class="btn @(c == ViewBag.SelectedColor ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-color="@c" asp-route-pageNum="1">@c</a>
     }
 </div>
