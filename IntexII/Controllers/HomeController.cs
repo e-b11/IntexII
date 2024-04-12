@@ -98,8 +98,25 @@ namespace IntexII.Controllers
             var singleProduct = _repo.Products
                 .Single(x => x.ProductId == productId);
 
+            var recommendations = _repo.Products
+                .Where(x => x.ProductId != productId && (x.Rec1 == productId || x.Rec2 == productId || x.Rec3 == productId || x.Rec4 == productId))
+                .ToList();
+
+            if (recommendations.Count < 5)
+            {
+                var additionalRecommendations = _repo.Products
+                    .Where(x => x.ProductId != productId && x.Category == singleProduct.Category && !recommendations.Contains(x))
+                    .Take(5 - recommendations.Count)
+                    .ToList();
+
+                recommendations.AddRange(additionalRecommendations);
+            }
+
+            ViewBag.TopRecommendations = recommendations.Take(5).ToList();
+
             return View(singleProduct);
         }
+
 
         //[HttpGet]
         //public IActionResult Checkout()

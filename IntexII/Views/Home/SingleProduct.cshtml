@@ -43,6 +43,23 @@
             </div>
         </div>
         
+         <div class="row mt-5">
+                    <div class="col">
+                        <h3>Top 5 Recommendations</h3>
+                        <div class="row">
+                            @foreach (var recommendation in ViewBag.TopRecommendations)
+                            {
+                                <div class="col-md-4 mb-3">
+                                    <a href="/Product/Details/@recommendation.ProductId">
+                                        <img src="@recommendation.ImgLink" alt="@recommendation.ProductName" />
+                                        <h4>@recommendation.ProductName</h4>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+        
     </main>
 </div>
 
