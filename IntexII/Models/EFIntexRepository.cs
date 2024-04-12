@@ -66,5 +66,37 @@ namespace IntexII.Models
             _context.SaveChanges();
         }
 
+        public IQueryable<CustomerRecs> CustomerRecs=> _context.CustomerRecs;
+        public List<int> GetCustomerRecsForCustomer(int id)
+        {
+            CustomerRecs recObject = _context.CustomerRecs.Single(r => r.CustomerId == id);
+            List<int> recList = new List<int>();
+            
+            if (recObject.Rec1.HasValue)  
+            {
+                recList.Add(recObject.Rec1.Value); 
+            }
+            if (recObject.Rec2.HasValue)  
+            {
+                recList.Add(recObject.Rec2.Value); 
+            }
+            if (recObject.Rec3.HasValue)  
+            {
+                recList.Add(recObject.Rec3.Value); 
+            }
+            if (recObject.Rec4.HasValue)  
+            {
+                recList.Add(recObject.Rec4.Value); 
+            }
+            if (recObject.Rec5.HasValue)  
+            {
+                recList.Add(recObject.Rec5.Value);  
+            }
+            
+            
+            return recList;
+        }
+
+
     }
 }

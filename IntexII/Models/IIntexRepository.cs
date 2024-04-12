@@ -20,5 +20,8 @@
 
         public IQueryable<LineItem> LineItems { get; }
         public void AddLineItem(LineItem lineItem);
+
+        public IQueryable<CustomerRecs> CustomerRecs { get; }
+        public List<int> GetCustomerRecsForCustomer(int id);
     }
 }
