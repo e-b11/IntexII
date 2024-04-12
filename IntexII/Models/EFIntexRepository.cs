@@ -97,6 +97,14 @@ namespace IntexII.Models
             return recList;
         }
 
+        public bool CustomerHasRecs(int customerId)
+        {
+            var customerRecsCount = _context.CustomerRecs.Count(cr => cr.CustomerId == customerId);
+            
+            // If the count is greater than 0, it means there are records for the customer
+            return customerRecsCount > 0;
+        }
+
 
     }
 }
