@@ -38,7 +38,14 @@
     
             <div class="form-group">
                 <label>Country:</label>
-                <input asp-for="Order.ShippingAddress" class="form-control" />
+                @* <input asp-for="Order.ShippingAddress" class="form-control" /> *@
+                <select asp-for="Order.ShippingAddress" class="form-control">
+                    <option value="USA">USA</option>
+                    <option value="United Kingddom">United Kingddom</option>
+                    <option value="Russia">Russia</option>
+                    <option value="China">Chine</option>
+                    <option value="India">India</option>
+                </select>
             </div>
             <h3>Payment Information</h3>
             <div class="form-group">
