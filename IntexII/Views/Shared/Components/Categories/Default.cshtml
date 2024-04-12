@@ -9,24 +9,9 @@
 @model IQueryable<string>
 
 <div class="d-grid gap-2">
-    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="BrowseProducts" asp-route-category="" asp-route-color="" asp-route-pageNum="">Home</a>
     @foreach (string c in Model ?? Enumerable.Empty<string>())
     {
         <a class="btn @(c == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="BrowseProducts" asp-route-category="@c" asp-route-pageNum="1">@c</a>
     }
 </div>
 
-@* <form method="post" asp-action="ChangeCategory">
-    Page Size:
-    <select name="pageSize" onchange="this.form.submit()">
-        <!option value="5" @(Model.PaginationInfo.ItemsPerPage == 5 ? "selected" : "")>5</!option>
-        <!option value="10" @(Model.PaginationInfo.ItemsPerPage == 10 ? "selected" : "")>10</!option>
-        <!option value="20" @(Model.PaginationInfo.ItemsPerPage == 20 ? "selected" : "")>20</!option>
-
-        @foreach (string c in Model ?? Enumerable.Empty<string>())
-        {
-            <!option value="@c" @(Mode == 5 ? "selected" : "")>@c</!option>
-        }
-
-    </select>
-</form> *@

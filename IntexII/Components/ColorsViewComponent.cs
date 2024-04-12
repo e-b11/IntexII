@@ -15,7 +15,7 @@ namespace IntexII.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedColor = RouteData?.Values["color"];
+            ViewBag.SelectedColor = RouteData?.Values["category"];
 
             var primaryColors = _repo.Products
                 .Select(x => x.PrimaryColor)

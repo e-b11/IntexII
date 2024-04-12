@@ -89,7 +89,7 @@ namespace IntexII.Controllers
 
         public IActionResult BrowseProducts(string? category, string? color, int pageNum = 1)
         {
-            int defaultPageSize = 5;
+            int defaultPageSize = 9;
 
             int pageSize = HttpContext.Session.GetInt32("pageSize") ?? defaultPageSize;
 
