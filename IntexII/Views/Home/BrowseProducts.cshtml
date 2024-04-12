@@ -10,6 +10,7 @@
         <form method="post" asp-action="ChangePageSize">
             Page Size:
             <select name="pageSize" onchange="this.form.submit()">
+                <!option value="6" @(Model.PaginationInfo.ItemsPerPage == 6 ? "selected" : "")>-</!option>
                 <!option value="5" @(Model.PaginationInfo.ItemsPerPage == 5 ? "selected" : "")>5</!option>
                 <!option value="10" @(Model.PaginationInfo.ItemsPerPage == 10 ? "selected" : "")>10</!option>
                 <!option value="20" @(Model.PaginationInfo.ItemsPerPage == 20 ? "selected" : "")>20</!option>
@@ -28,15 +29,21 @@
             <div class="row">
                 @foreach (var p in Model.Products)
                 {
-                    <div class="col-md-4">
-                        <!-- Each product will take up 4 columns on medium-sized screens and larger -->
-                        <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId" class="card">
-                            <img src="@p.ImgLink" alt="@p.ProductName" class="img-fluid" loading="lazy">
-                            <p>@p.ProductName</p>
-                        </a>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@p.ProductId">
+                                <img src="@p.ImgLink" alt="@p.ProductName" class="card-img-top" loading="lazy">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">@p.ProductName</h5>
+                                <br />
+                                <button type="submit" class="btn-outline-primary btn-sm">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
+
 
             <div page-model="@Model.PaginationInfo" page-action="BrowseProducts"
                  page-classes-enabled="true" page-class="btn"

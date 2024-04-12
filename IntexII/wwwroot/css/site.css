@@ -194,10 +194,6 @@ aside {
     text-align: center;
 }
 
-.btn.btn-outline-secondary {
-    border-color: #000000; /* Set border color to black */
-    color: #000000; /* Set text color to black */
-}
 
     .btn.btn-outline-secondary:hover {
         background-color: #FEC107; /* Change background color to yellow on hover */
@@ -207,4 +203,50 @@ aside {
     background-color: #FEC107; /* Change background color to yellow */
     border-color: #FEC107; /* Change border color to yellow */
     color: black; /* Change text color */
+}
+
+/* Custom styles for the login page */
+
+/* Center the login form */
+#account {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+/* Style form inputs and labels */
+.form-floating input[type="email"],
+.form-floating input[type="password"] {
+    border-radius: 5px;
+}
+
+.form-floating label {
+    font-size: 0.9rem;
+}
+
+/* Style the "Remember me" checkbox */
+.checkbox {
+    font-size: 0.9rem;
+}
+
+/* Style the "Log in" button */
+#login-submit {
+    margin-top: 10px;
+}
+
+/* Style the "Forgot password" and "Register" links */
+#forgot-password,
+a[asp-page="./Register"],
+#resend-confirmation {
+    font-size: 0.85rem;
+}
+
+/* Style the external login buttons */
+#external-account .btn {
+    margin-bottom: 10px;
+}
+
+.btn-primary:hover {
+    color: #ffffff; /* White text color on hover */
+    background-color: #FEC107; /* Yellow button fill on hover */
+    border-color: #FEC107; /* Yellow border color on hover */
 }
