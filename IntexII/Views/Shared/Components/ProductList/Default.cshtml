@@ -1,14 +1,17 @@
 @model List<IntexII.Models.Product>
 
+
 <div class="products-scroll-container">
     <div class="product-cards-container">
         @foreach (var p in Model)
         {
             <div class="product-card">
                 <a asp-controller="Home" asp-action="SingleProduct" asp-route-id="@p.ProductId">
+                    <a href="/Home/SingleProduct?productId=@p.ProductId">
                     <h3>@p.ProductName.Substring(0, Math.Min(30, @p.ProductName.Length))</h3>
                     <img src="@p.ImgLink" alt="@p.ProductName" width="500" height="636" loading="lazy">
                     <p>$@p.Price.ToString("0.00")</p>
+                </a>
                 </a>
             </div>
         }
